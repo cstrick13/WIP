@@ -1,0 +1,58 @@
+
+<div class="splash-screen">
+    <div class="left-container">
+    
+        <i class="fa-solid fa-dumbbell"></i>
+    </div>
+    <div class="right-container">
+        <h1>Work In Progress</h1>
+        <h2>Find Your Fit</h2>
+      <button type="button" class="button-1" (click)="googleSignIn()">
+        Sign in with Google
+      </button>
+      <span>--------------------Or----------------------</span>
+      <button type="button" class="button-2" data-toggle="modal" data-target="#createAccountModal">
+        Create an Account
+      </button>
+      <div>
+      <p>
+        Already have an account? 
+      </p>
+      <button type="button" class="button-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Sign in
+      </button>
+    </div>
+    </div>
+  </div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="login()">
+                <label for="email" class="label">Email:</label>
+                <input type="email" id="email" [(ngModel)]="email" name="email" required />
+                <label for="password" class="label">Password:</label>
+                <input type="password" id="password" [(ngModel)]="password" name="password" required />
+                <button type="submit" class="label" data-bs-dismiss="modal">Log In</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  

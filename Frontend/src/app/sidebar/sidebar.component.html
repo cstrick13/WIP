@@ -1,0 +1,10 @@
+<nav class="sidebar-nav">
+    <a routerLink="/home">Home</a>
+    <a routerLink="/feed">Feed</a>
+  
+    <div class="user-info" *ngIf="userEmail">
+      <p>Logged in as: {{ userEmail }}</p>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </nav>
+  

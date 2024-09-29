@@ -2,8 +2,8 @@
     <a routerLink="/home">Home</a>
     <a routerLink="/feed">Feed</a>
   
-    <div class="user-info" *ngIf="userEmail">
-      <p>Logged in as: {{ userEmail }}</p>
+    <div class="user-info" *ngIf="userProfile">
+      <p>Welcome, {{ userProfile.username }}!</p>
       <button (click)="logout()">Logout</button>
     </div>
   </nav>

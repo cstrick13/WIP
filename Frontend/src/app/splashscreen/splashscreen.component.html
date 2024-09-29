@@ -10,8 +10,8 @@
       <button type="button" class="button-1" (click)="googleSignIn()">
         Sign in with Google
       </button>
-      <span>--------------------Or----------------------</span>
-      <button type="button" class="button-2" data-toggle="modal" data-target="#createAccountModal">
+      <span>----------------------- Or -----------------------</span>
+      <button type="button" class="button-2" data-bs-toggle="modal" data-bs-target="#createAccountModal">
         Create an Account
       </button>
       <div>
@@ -31,27 +31,152 @@
   <div class="cube"></div>
   <div class="cube"></div>
 
-  
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Sign In</h1>
         </div>
         <div class="modal-body">
-            <form (ngSubmit)="login()">
-                <label for="email" class="label">Email:</label>
-                <input type="email" id="email" [(ngModel)]="email" name="email" required />
-                <label for="password" class="label">Password:</label>
-                <input type="password" id="password" [(ngModel)]="password" name="password" required />
-                <button type="submit" class="label" data-bs-dismiss="modal">Log In</button>
-            </form>
+          <form (ngSubmit)="login()" class="login-form">
+            <div class="form-group">
+              <label for="email" class="label">Email</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="password" class="label">Password</label>
+              <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+            </div>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" aria-label="Close">Log In</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="createAccountModal" tabindex="-1" aria-labelledby="createAccountLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createAccountLabel">Create an Account</h1>
+        </div>
+        <div class="modal-body">
+          <div id="carouselExample" class="carousel slide" data-bs-interval="false">
+            <div class="carousel-inner">
+              <!-- Step 1: User Information -->
+              <div class="carousel-item active">
+                <form>
+                  <div class="form-group mb-3">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control" required />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" id="birthday" [(ngModel)]="birthday" name="birthday" class="form-control" required />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" [(ngModel)]="location" name="location" class="form-control" required />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" [(ngModel)]="height" name="height" class="form-control" required />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" [(ngModel)]="weight" name="weight" class="form-control" required />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="bodyType">Body Type:</label>
+                    <select id="bodyType" [(ngModel)]="bodyType" name="bodyType" class="form-select" required>
+                      <option value="slim">Slim</option>
+                      <option value="average">Average</option>
+                      <option value="athletic">Athletic</option>
+                      <option value="heavy">Heavy</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="workoutFrequency">Workout Frequency:</label>
+                    <select id="workoutFrequency" [(ngModel)]="workoutFrequency" name="workoutFrequency" class="form-select" required>
+                      <option value="never">Never</option>
+                      <option value="occasionally">Occasionally</option>
+                      <option value="regularly">Regularly</option>
+                      <option value="daily">Daily</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+  
+              <!-- Step 2: Preferences -->
+              <div class="carousel-item">
+                <div class="interest-container">
+                    <!-- Interest Picker -->
+                    <div class="interest-picker">
+                      <div class="category" *ngFor="let category of categorizedInterests">
+                        <h3 class="category-title">{{ category.name }}</h3>
+                        <div class="interests-list">
+                          <label *ngFor="let interest of category.interests">
+                            <input 
+                              type="checkbox" 
+                              [value]="interest" 
+                              (change)="onInterestChange($event, interest)" 
+                            />
+                            {{ interest }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                
+                  </div>
+              </div>
+  
+              <!-- Step 3: Account Creation -->
+              <div class="carousel-item">
+                <form (ngSubmit)="createUser()">
+                  <div class="form-group mb-3">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required />
+                  </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Create Account</button>
+                  </div>
+                </form>
+              </div>
+  
+            </div>
+  
+            <!-- Carousel Controls -->
+          </div>
+  
+          <!-- Moved Carousel Controls Below -->
+          <div class="d-flex justify-content-between">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
   
 
   

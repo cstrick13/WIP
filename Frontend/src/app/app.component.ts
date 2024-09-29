@@ -14,6 +14,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const auth = getAuth();
+    const isLoggedIn = localStorage.getItem('isUserLoggedIn') === 'true';
+    // Code is meant to prevent the split second reload for authstate change uder login is saved i
+    if (isLoggedIn) {
+    // User is logged in
+    console.log('User is logged in from local storage.');
+    this.showSplashScreen = false; // Skip splash screen
+    this.router.navigate(['/home']); // Navigate to home
+    } else {
+    // User is not logged in
+    console.log('User is not logged in, showing splash screen.');
+    this.showSplashScreen = true; // Show splash screen
+    }
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is logged in

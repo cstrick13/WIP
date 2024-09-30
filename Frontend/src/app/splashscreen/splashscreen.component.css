@@ -7,6 +7,11 @@
     height: 100vh;
    
   }
+  /* .img{
+    height: 100px;
+    width: 100px
+  } */
+  
   .fa-dumbbell {
     color: white;
     font-size: 10rem; /* Adjust size as needed */
@@ -332,7 +337,7 @@ h2, h3 {
     -webkit-animation-delay: 2s;
             animation-delay: 2s;
     left: 25vw;
-    top: 40vh;
+    top: 30vh;
   }
   .cube:nth-child(3) {
     -webkit-animation-delay: 4s;

@@ -7,10 +7,10 @@
     height: 100vh;
    
   }
-  /* .img{
-    height: 100px;
-    width: 100px
-  } */
+  .img{
+    height: 400px;
+    width: 400px
+  }
   
   .fa-dumbbell {
     color: white;
@@ -313,6 +313,10 @@ h2, h3 {
     .btn {
       font-size: 0.9rem;
     }
+    .img{
+      height: 200px;
+      width: 200px
+    }
   }
   
 
@@ -361,7 +365,7 @@ h2, h3 {
     -webkit-animation-delay: 10s;
             animation-delay: 10s;
     left: 50vw;
-    top: 10vh;
+    top: 12vh;
   }
   
   @-webkit-keyframes cube {

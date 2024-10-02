@@ -1,0 +1,28 @@
+
+:host {
+    display: block;                      
+    width: 350px;                      
+    height: 100vh;                    
+    border-right: .1px solid #ffffff;  
+    position: fixed;                   
+    left: 0;                          
+    top: 0;                            
+    z-index: 1;                         
+}
+
+.sidebar-nav {
+    display: flex;                      
+    flex-direction: column;            
+    padding: 20px;                     
+}
+
+.sidebar-nav a {
+    color: #ffffff;                    
+    text-decoration: none;             
+    padding: 10px;                  
+    border-radius: 5px;              
+}
+
+.sidebar-nav a:hover {
+    background-color: #dcdcdc;       
+}

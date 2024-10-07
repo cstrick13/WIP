@@ -1,4 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 from django.http.response import JsonResponse
 from django.shortcuts import render
 
@@ -20,6 +21,21 @@ def testApi(request,id=0):
     tests = Test.objects.all()
     tests_serializer = TestSerializer(tests,many=True)
     return JsonResponse(tests_serializer.data,safe=False)
+
+@api_view(['POST'])
+def createUser(request):
+    print("Request: ",request)
+    if request.method == 'POST':
+        user_data = JSONParser().parse(request)
+        print("User Data: ",user_data)
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return JsonResponse("Added Successfully",safe=False)
+        return JsonResponse("Failed to Add",safe=False)
+    else:
+        print("Failed to Add")
+        return JsonResponse("Failed to Add",safe=False)
 
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):

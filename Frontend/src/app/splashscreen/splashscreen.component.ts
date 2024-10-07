@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-splashscreen',
@@ -41,7 +42,7 @@ export class SplashscreenComponent {
     { name: 'Fitness Education', interests: ['Workshops', 'Webinars', 'Nutrition Classes', 'Fitness Certifications', 'Health Coaching', 'Personal Development'] }
   ];
   
-  constructor(private router: Router) {}
+  constructor(private router: Router,private sharedService: SharedService) {}
 
   selectedInterests: string[] = [];
   onInterestChange(event: any, interest: string) {
@@ -55,14 +56,12 @@ export class SplashscreenComponent {
     }
     console.log(this.selectedInterests)
   }
-  // Step 1: Create user with email and password
   createUser() {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, this.email, this.password)
     .then((userCredential) => {
-      // Successfully created user
       const user = userCredential.user;
-      this.userId = user.uid;  // Store user ID for Firestore
+      this.userId = user.uid;
       console.log('User created successfully:', user);
       this.createUserProfile();
       
@@ -74,27 +73,52 @@ export class SplashscreenComponent {
   }
 
   async createUserProfile() {
-  const docRef = doc(this.firestore, 'users', this.userId); // Create document reference using the userId
-
-  await setDoc(docRef, {
-    username: this.username,
-    birthday: this.birthday,
-    location: this.location,
-    height: this.height, // Add height to Firestore document
-    weight: this.weight, // Add weight to Firestore document
-    bodyType: this.bodyType, // Add body type to Firestore document
-    workoutFrequency: this.workoutFrequency,
-    selectedInterests: this.selectedInterests 
-  })
-    .then(() => {
-      console.log('Profile created successfully');
-      this.resetModal();
-      localStorage.setItem('isUserLoggedIn', 'true');
+    const docRef = doc(this.firestore, 'users', this.userId); // Create document reference using the userId
+  
+    await setDoc(docRef, {
+      username: this.username,
+      birthday: this.birthday,
+      location: this.location,
+      height: this.height,
+      weight: this.weight,
+      bodyType: this.bodyType, // Add body type
+      workoutFrequency: this.workoutFrequency, // Add workout frequency
+      selectedInterests: this.selectedInterests 
     })
-    .catch(error => {
-      console.error('Error creating profile:', error.message);
-    });
-}
+      .then(() => {
+        console.log('Profile created successfully in Firestore');
+        this.sendProfileToDjango();  // Call the function to send data to Django
+        localStorage.setItem('isUserLoggedIn', 'true');
+        this.resetModal();
+      })
+      .catch(error => {
+        console.error('Error creating profile in Firestore:', error.message);
+      });
+  }
+  
+  sendProfileToDjango() {
+    const userProfileData = {
+      user_id: this.userId,  // Send the user ID as well
+      username: this.username,
+      birthday: this.birthday,
+      location: this.location,
+      height: this.height,
+      weight: this.weight,
+      body_type: this.bodyType,
+      workout_frequency: this.workoutFrequency,
+      selected_interests: this.selectedInterests
+    };
+  
+    this.sharedService.createUserProfile(userProfileData).subscribe(
+      response => {
+        console.log('Profile created successfully in Django:', response);
+      },
+      error => {
+        console.error('Error sending profile to Django:', error);
+      }
+    );
+  }
+  
 resetModal() {
   this.username = '';
   this.email = '';

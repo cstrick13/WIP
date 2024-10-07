@@ -13,4 +13,10 @@ export class SharedService {
   getTestList(): Observable<any[]> {
     return this.http.get<any[]>(`${this.APIUrl}/tests/`);
   }
+  getUserList(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/users/`);
+  }
+  createUserProfile(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.APIUrl}/create-user/`, userData);
+  }
 }

@@ -5,11 +5,16 @@ class Test(models.Model):
     name = models.CharField(max_length=255,null=True)
     
 class User(models.Model):
-    username = models.CharField(max_length=30, unique=True)
-    f_name = models.CharField(max_length=30, blank=True)
-    l_name = models.CharField(max_length=30, blank=True)
-    bio = models.CharField(max_length=300)
-    
+    user_id = models.CharField(max_length=100, unique=True,null=True)
+    username = models.CharField(max_length=30,null=True)
+    birthday = models.DateField(null=True)
+    location = models.CharField(max_length=100,null=True)
+    height = models.FloatField(null=True, blank=True)  
+    weight = models.FloatField(null=True, blank=True)  
+    body_type = models.CharField(max_length=30, blank=True,null=True)
+    workout_frequency = models.CharField(max_length=50, blank=True,null=True)  
+    selected_interests = models.JSONField(null=True) 
+
     def __str__(self):
         return self.username
     

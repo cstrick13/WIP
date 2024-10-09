@@ -48,7 +48,11 @@ export class SidebarComponent implements OnInit {
       console.error('Error fetching document:', e);
     }
   }
-
+  
+  createPost() {
+    // Logic to create a post
+    console.log('Post button clicked');
+  }
 
   logout(): void {
     const auth = getAuth();

@@ -1,6 +1,6 @@
 :host {
   display: flex;
-  flex: 0.15; 
+  flex: 0; 
   height: 100vh;
 }
 
@@ -23,10 +23,9 @@
 
 .form-control {
   background-color: #242424;
-  border: 1px solid #242424;
   padding: 10px;
-  margin: 10px 10px 10px 10px;
-  border-radius: 20px;
+  margin: 10px;
+  
 }
 
 .form-control:hover {

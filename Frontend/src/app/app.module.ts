@@ -10,13 +10,15 @@ import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SplashscreenComponent,
-    SidebarComponent
+    SidebarComponent,
+    RightSidebarComponent
   ],
   imports: [
     BrowserModule,

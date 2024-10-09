@@ -3,9 +3,10 @@
   <app-splashscreen *ngIf="showSplashScreen"></app-splashscreen>
   <ng-container *ngIf="!showSplashScreen">
     <app-sidebar class="sidebar"></app-sidebar> <!-- Left Sidebar -->
-  
+
     <div class="content">
       <router-outlet></router-outlet> <!-- Middle Content for Pages -->
     </div>
+    <app-right-sidebar class="right-sidebar"></app-right-sidebar> <!-- Right Sidebar -->
   </ng-container>
 </div>

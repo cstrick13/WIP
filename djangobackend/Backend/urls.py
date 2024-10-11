@@ -9,9 +9,6 @@ router.register(r'posts', views.PostViewSet)
 router.register(r'replies', views.ReplyViewSet)
 
 urlpatterns = [
-   path('', include(router.urls)),
-   # Custom paths
    path('tests/',views.testApi),
-   path('create-user/', views.createUser),
-   path('create-post/', views.createPost),
+   path('', include(router.urls))
 ]

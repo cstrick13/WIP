@@ -1,6 +1,39 @@
 :host {
-    display: flex;                                       
-    height: 100vh;                     
-    justify-content: center;
-    align-items: center;                         
+    display: flex;
+    flex: 1;
+    height: 100vh;
+  }
+
+.feed {
+    flex: 1;  
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    min-width: fit-content; 
+    overflow-y: scroll;
 }
+
+.postbox {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ffffff;
+    padding-right: 10px;
+}
+
+.postbox form {
+    display: flex;
+    flex-direction: column;
+}
+
+.postbox_input {
+    display: flex;
+    padding: 20px;
+}
+
+.postbox_input input {
+    flex: 1;
+    margin-left: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    outline: none;
+}
+

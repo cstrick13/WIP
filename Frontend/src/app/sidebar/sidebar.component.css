@@ -1,28 +1,57 @@
 
 :host {
+    /* Variables */
+    --main-text-color: rgb(255, 255, 255);
+    --twitter-blue: #1b95e9;
+    --twitter-blue-hover: #1a85d6;
+
     display: block;                      
-    width: 350px;                      
+    width: 250px;                      
     height: 100vh;                    
     border-right: .1px solid #ffffff;  
-    position: fixed;                   
-    left: 0;                          
-    top: 0;                            
-    z-index: 1;                         
+    position: relative;                    
+    z-index: 1;
+    color: var(--main-text-color);                    
 }
 
 .sidebar-nav {
-    display: flex;                      
-    flex-direction: column;            
+    display: flex;      
+    flex-direction: column;  
+    height: 100%;          
     padding: 20px;                     
 }
 
+
 .sidebar-nav a {
-    color: #ffffff;                    
+    color: var(--main-text-color);                    
     text-decoration: none;             
     padding: 10px;                  
-    border-radius: 5px;              
+    border-radius: 30px;   
+    transition: background-color 100ms;           
 }
 
 .sidebar-nav a:hover {
-    background-color: #dcdcdc;       
+    background-color: #201c1c;
+}
+
+.post-button {
+    background-color: var(--twitter-blue);
+    color: var(--main-text-color);
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 100ms;
+}
+
+.post-button:hover {
+    background-color: var(--twitter-blue-hover);
+}
+
+.user-info {
+    margin-top: auto;
+    text-align: center;
 }

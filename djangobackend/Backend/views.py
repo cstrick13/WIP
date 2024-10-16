@@ -37,6 +37,20 @@ def createUser(request):
         print("Failed to Add")
         return JsonResponse("Failed to Add",safe=False)
 
+        print("Failed to Add") # DEBUG
+        return JsonResponse("Failed to Add. Not POST.",safe=False)
+
+@api_view(['POST'])
+def createPost(request):
+    if request.method == 'POST':
+        post_data = JSONParser().parse(request)
+        post_serializer = PostSerializer(data=post_data)
+        if post_serializer.is_valid():
+            post_serializer.save()
+            return JsonResponse("Added Successfully",safe=False)
+        return JsonResponse("Failed to Add",safe=False)
+    else:
+        return JsonResponse("Failed to Add. Not POST.",safe=False)
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

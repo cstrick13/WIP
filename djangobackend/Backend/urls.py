@@ -14,4 +14,5 @@ urlpatterns = [
    # Custom paths
    path('tests/',views.testApi),
    path('create-user/', views.createUser),
+   path('create-post/', views.createPost),
 ]

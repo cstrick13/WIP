@@ -9,6 +9,7 @@ class User(models.Model):
     f_name = models.CharField(max_length=30, blank=True)
     l_name = models.CharField(max_length=30, blank=True)
     bio = models.CharField(max_length=300)
+    preferences = models.JSONField(default=list, blank=True)
     
     def __str__(self):
         return self.username
@@ -19,6 +20,7 @@ class Post(models.Model):
     media_type = models.CharField(max_length=15)
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField()
+    tags = models.JSONField(default=list, blank=True)
     
     def __str__(self):
         return self.content[:50]

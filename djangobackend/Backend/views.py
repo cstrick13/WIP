@@ -48,6 +48,26 @@ def createPost(request):
         return JsonResponse("Failed to Add",safe=False)
     else:
         return JsonResponse("Failed to Add. Not POST.",safe=False)
+    
+@api_view(['GET'])
+def getUserFeed(request):
+    if request.method == "GET":
+        print("=== GET data === \n" + str(request))
+        try:
+            user_id = request.GET.get('userId')
+            user = User.objects.get(id=user_id)
+            preferences = user.preferences
+            print("User ID: ",user_id)
+            print("User: ",user)
+            print("Preferences: ",preferences)
+        except Exception as e:
+            print("Failed to get user feed. Error: ",e)
+            return JsonResponse("Failed to get user feed",safe=False)
+        
+        feed = []
+        return JsonResponse("Success",safe=False)
+    
+    return JsonResponse("Failed to get. Not GET.",safe=False)
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

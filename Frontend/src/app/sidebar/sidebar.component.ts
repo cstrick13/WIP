@@ -19,6 +19,20 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     const auth = getAuth();
+    const themeToggleButton = document.getElementById('theme-toggle');
+
+    const htmlElement = document.getElementById('htmlPage');
+    const checkbox = document.getElementById('checkbox') as HTMLInputElement;
+
+    checkbox?.addEventListener("change", () => {
+      if (checkbox.checked) {
+        // toggle dark mode on checkbox change
+        htmlElement?.setAttribute('data-bs-theme', 'dark');
+      }
+      else {
+        htmlElement?.setAttribute('data-bs-theme', 'light');
+      }
+    });
     
     onAuthStateChanged(auth, async (user) => {
       if (user) {

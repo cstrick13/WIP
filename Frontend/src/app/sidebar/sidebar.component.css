@@ -1,57 +1,52 @@
-
 :host {
-    /* Variables */
-    --main-text-color: rgb(255, 255, 255);
-    --twitter-blue: #1b95e9;
-    --twitter-blue-hover: #1a85d6;
-
-    display: block;                      
-    width: 250px;                      
-    height: 100vh;                    
-    border-right: .1px solid #ffffff;  
-    position: relative;                    
-    z-index: 1;
-    color: var(--main-text-color);                    
+    overflow-x: hidden;
+}
+  
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+  
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+  
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+  
+#page-content-wrapper {
+    min-width: 100vw;
+}
+  
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+  
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+  
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+    .show {
+        margin-left: 0!important;
+    }
+    .hide {
+        margin-left: -15rem!important;
+    }
 }
 
-.sidebar-nav {
-    display: flex;      
-    flex-direction: column;  
-    height: 100%;          
-    padding: 20px;                     
-}
-
-
-.sidebar-nav a {
-    color: var(--main-text-color);                    
-    text-decoration: none;             
-    padding: 10px;                  
-    border-radius: 30px;   
-    transition: background-color 100ms;           
-}
-
-.sidebar-nav a:hover {
-    background-color: #201c1c;
-}
-
-.post-button {
-    background-color: var(--twitter-blue);
-    color: var(--main-text-color);
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 30px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    transition: background-color 100ms;
-}
-
-.post-button:hover {
-    background-color: var(--twitter-blue-hover);
-}
-
-.user-info {
-    margin-top: auto;
-    text-align: center;
+@media (max-width: 767px) {
+    .hide {
+        margin-left: -0!important;
+    }
 }

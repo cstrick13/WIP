@@ -69,7 +69,7 @@
    
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1266px) {
     #sidebar-wrapper span{
         display: none;
     }
@@ -95,7 +95,7 @@
 }
 
 
-@media (max-width: 799px) {
+@media (max-width: 1265px) {
     #sidebar-wrapper span{
         display: none;
     }

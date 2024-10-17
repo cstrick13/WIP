@@ -1,67 +1,92 @@
-     <div class="border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Therichpost </div>
-        <div class="list-group list-group-flush">
-            <a routerLink="/home" class="list-group-item list-group-item-action">
-                <i class="fas fa-home"></i> 
-                Home
-            </a>
-            <a routerLink="/explore" class="list-group-item list-group-item-action">
-                <i class="fas fa-compass"></i>
-                Explore
-            </a>
-            <a routerLink="/notifications" class="list-group-item list-group-item-action">
-                <i class="fas fa-bell"></i>
-                Notifications
-            </a>
-            <a routerLink="/messages" class="list-group-item list-group-item-action">
-                <i class="fas fa-envelope"></i>
-                Messages
-            </a>
-            <a routerLink="/grok" class="list-group-item list-group-item-action">
-                <i class="fas fa-brain"></i>
-                Grok
-            </a>
-            <a routerLink="/bookmarks" class="list-group-item list-group-item-action">
-                <i class="fas fa-bookmark"></i>
-                Bookmarks
-            </a>
-            <a routerLink="/communities" class="list-group-item list-group-item-action">
-                <i class="fas fa-users"></i>
-                Communities
-            </a>
-            <a routerLink="/premium" class="list-group-item list-group-item-action">
-                <i class="fas fa-gem"></i>
-                Premium
-            </a>
-            <a routerLink="/business" class="list-group-item list-group-item-action">
-                <i class="fas fa-briefcase"></i>
-                Business
-            </a>
-            <a routerLink="/profile" class="list-group-item list-group-item-action">
-                <i class="fas fa-user"></i>
-                Profile
-            </a>
-            <a routerLink="/more" class="list-group-item list-group-item-action">
-                <i class="fas fa-ellipsis-h"></i>
-                More
-            </a>
-        </div>
-        <div class="user-info">
-            <p>Welcome, {{ userProfile.username }}!</p>
-            <button (click)="logout()">Logout</button>
-        </div>
-        <input type="checkbox" class="checkbox" id="checkbox">
+<div class="border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">
+        <a routerLink="/home" class="link-underline-primary">
+            <img class="img" src="/assets/logo.png" alt="App Logo">
+            <span>Work In Progress</span>
+        </a>
+        <!-- A button alternative to the above anchor tag
+        <button type="button" class="sidebar-button" (click)="/home">
+            <img class="img" src="/assets/logo.png" alt="App Logo">
+            <span>Work In Progress</span>
+        </button>
+        -->
     </div>
-    <!-- /#sidebar-wrapper -->
+    <div class="list-group list-group-flush">
+        <a routerLink="/home" class="list-group-item list-group-item-action item-home" style="width: max-content">
+            <i class="fas fa-home"></i> 
+            <span>Home</span>
+        </a>
+        <a routerLink="/explore" class="list-group-item list-group-item-action item-explore" style="width: max-content">
+            <i class="fas fa-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a routerLink="/notifications" class="list-group-item list-group-item-action item-notifications" style="width: max-content">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a routerLink="/messages" class="list-group-item list-group-item-action item-messages" style="width: max-content">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+        </a>
+        <a routerLink="/grok" class="list-group-item list-group-item-action item-grok" style="width: max-content">
+            <i class="fas fa-brain"></i>
+            <span>Grok</span>
+        </a>
+        <a routerLink="/bookmarks" class="list-group-item list-group-item-action item-bookmarks" style="width: max-content">
+            <i class="fas fa-bookmark"></i>
+            <span>Bookmarks</span>
+        </a>
+        <a routerLink="/communities" class="list-group-item list-group-item-action item-communities" style="width: max-content">
+            <i class="fas fa-users"></i>
+            <span>Communities</span>
+        </a>
+        <a routerLink="/premium" class="list-group-item list-group-item-action item-premium" style="width: max-content">
+            <i class="fas fa-gem"></i>
+            <span>Premium</span>
+        </a>
+        <a routerLink="/business" class="list-group-item list-group-item-action item-business" style="width: max-content">
+            <i class="fas fa-briefcase"></i>
+            <span>Business</span>
+        </a>
+        <a routerLink="/profile" class="list-group-item list-group-item-action item-profile" style="width: max-content">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+        <a routerLink="/more" class="list-group-item list-group-item-action item-more" style="width: max-content">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>More</span>
+        </a>
 
+        <div class="main-posting-section">
+            <button type="button" class="post-button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Post</span></button>
+        </div>
+            
+        <div class="user-info-section">
+            <button type="button" class="user-info" (click)="logout()"><span>Welcome, {{ userProfile.username }}!</span></button>
+        </div>
 
-<!-- <button type="button" class="post-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Post</button> -->
+        <!-- ###### Make actual toggle ###### -->
+        <input type="checkbox" class="checkbox" id="checkbox">
 
-<!-- 
-<div class="user-info">
-  <p>Welcome, {{ userProfile.username }}!</p>
-  <button (click)="logout()">Logout</button>
+    </div>
 </div>
 
-</nav>
--->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="exampleModalLabel">Modal title</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

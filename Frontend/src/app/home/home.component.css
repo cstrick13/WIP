@@ -1,8 +1,86 @@
+/*
 :host {
     display: flex;
     flex: 1;
     height: 100vh;
-  }
+}
+    */
+
+.feed {
+    flex: 0.5;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    min-width: fit-content; 
+    overflow-y: scroll;
+}
+
+.feed_header {
+    position: sticky;
+    top: 0;
+    background-color: var(--bs-secondary-bg);
+    z-index: 100;
+    border: 1px solid #ffffff;
+    padding: 10px 20px;
+}
+
+.feed_header h2 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.feed::-webkit-scrollbar {
+    display: none;
+}
+
+.feed {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.tweetbox {
+    padding: 10px;
+    border-bottom: 8px solid #ffffff;
+    padding-right: 10px;
+}
+
+.tweetbox form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tweetbox_input {
+    display: flex;
+    padding: 20px;
+}
+
+.tweetbox_input input {
+    flex: 1;
+    margin-left: 20px;
+    border: none;
+    outline: none;
+}
+
+
+.tweetbox_button {
+    border: none;
+    color: white;
+    background-color: #00A0C6;
+    font-weight: 900;
+    border-radius: 30px;
+    width: 80px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: auto;
+
+
+}
+
+
+
+
+
+
+  /*
 
 .feed {
     flex: 1;  
@@ -36,4 +114,4 @@
     border: none;
     outline: none;
 }
-
+*/

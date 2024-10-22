@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'splash', component: SplashscreenComponent, canActivate: [authGuard]},
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'profile-page', component: ProfilePageComponent},
-  { path: '', redirectTo: '/splash', pathMatch: 'full' },];
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to 'home' if no path is provided
+  { path: '**', redirectTo: '/home' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

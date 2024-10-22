@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     // User is logged in
     console.log('User is logged in from local storage.');
     this.showSplashScreen = false; // Skip splash screen
-    this.router.navigate(['/home']); // Navigate to home
+    
     } else {
     // User is not logged in
     console.log('User is not logged in, showing splash screen.');
@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
         // User is logged in
         console.log('User is logged in:', user);
         this.showSplashScreen = false;
-        this.router.navigate(['/home']); // Navigate to home if logged in
       } else {
         // User is not logged in
         console.log('User is not logged in, showing splash screen.');

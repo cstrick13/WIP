@@ -2,10 +2,11 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from django.http.response import JsonResponse
 from django.shortcuts import render
-
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import viewsets
+
+from django.core.exceptions import ValidationError
 
 
 from Backend.serializers import (TestSerializer)
@@ -29,9 +30,16 @@ def createUser(request):
         user_data = JSONParser().parse(request)
         print("User Data: ",user_data) # DEBUG
         user_serializer = UserSerializer(data=user_data)
-        if user_serializer.is_valid():
-            user_serializer.save()
-            return JsonResponse("Added Successfully",safe=False)
+        try:
+            if user_serializer.is_valid(raise_exception=True):
+                user_serializer.save()
+                return JsonResponse("Added Successfully",safe=False)
+            else:
+                print("Failed to Add. User is not valid.") # DEBUG
+        except ValidationError as e:
+            print("Error: " + e) # DEBUG
+            return JsonResponse("Failed to Add",safe=False)
+            
         return JsonResponse("Failed to Add",safe=False)
     else:
         print("Failed to Add") # DEBUG

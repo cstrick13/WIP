@@ -11,7 +11,7 @@
         </div>
         <!-- Profile Picture -->
         <div class="profile-picture">
-            <img [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : 'assets/placeholder-profile.jpg'" alt="Profile Picture">
+            <img [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="">
         </div>
         <div class="profile-info">
             <h1>{{ userProfile?.username || 'Username Not Available' }}</h1>

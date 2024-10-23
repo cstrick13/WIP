@@ -63,9 +63,27 @@ export class SidebarComponent implements OnInit {
     }
   }
   
-  createPost() {
-    // Logic to create a post
-    console.log('Post button clicked');
+  async createPost() {
+    const postForm = document.getElementById('postForm') as HTMLFormElement;
+    const postTweet = document.getElementById('postTweet') as HTMLTextAreaElement;
+
+    postForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const tweet = postTweet.value.trim();
+
+      if(tweet) {
+        const postData = {
+          content: tweet,
+        };
+      }
+
+    });
+
+  }
+
+  sendPostToDjango() {
+
   }
 
   logout(): void {

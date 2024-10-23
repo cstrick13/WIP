@@ -18,6 +18,7 @@ class User(models.Model):
         return self.userid 
     
 class Post(models.Model):
+    postid = models.CharField(max_length=30, unique=True,primary_key=True)
     userid = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
     media_type = models.CharField(max_length=15)

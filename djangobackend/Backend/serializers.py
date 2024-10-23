@@ -15,7 +15,7 @@ class ConnectionSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Connection
-        fields = ['follower','followed', 'timestamp']
+        fields = '__all__'
         
     def validate(self, data):
         if data['follower'] == data['followed']:
@@ -26,10 +26,10 @@ class PostSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
-        fields = ['user', 'content', 'media_type', 'timestamp', 'likes']
+        fields = '__all__'
         
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
-        fields = ['post', 'user', 'content', 'timestamp']
+        fields = '__all__'
         

@@ -14,4 +14,5 @@ urlpatterns = [
    path('tests/',views.testApi),
    path('create-user/', views.createUser),
    path('create-post/', views.createPost),
+   path('get-posts/', views.getPosts),
 ]

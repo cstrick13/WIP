@@ -56,6 +56,21 @@ def createPost(request):
         return JsonResponse("Failed to Add",safe=False)
     else:
         return JsonResponse("Failed to Add. Not POST.",safe=False)
+    
+# Get all posts from a user
+@api_view(['POST'])
+def getPosts(request):
+    if request.method == 'POST':
+        user_id = JSONParser().parse(request)['userid']
+        posts = Post.objects.filter(userid=user_id)
+        post_serializer = PostSerializer(posts,many=True)
+        return JsonResponse(post_serializer.data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
+    
+
+
+
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

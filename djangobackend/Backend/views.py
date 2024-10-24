@@ -69,7 +69,20 @@ def getPosts(request):
         return JsonResponse("Failed to Get. Not POST.",safe=False)
     
 
-
+@api_view(['POST'])
+def getPostFeed(request):
+    if request.method == 'POST':
+        posts = []
+        # Get all posts from connections
+        user_id = JSONParser().parse(request)['userid']
+        print("User ID: ",user_id)
+        # Get all connections
+        connections = Connection.objects.filter(follower=user_id)
+        print("Connections: ",connections)
+        return JsonResponse("Added Successfully",safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
+        
 
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):

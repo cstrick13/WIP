@@ -60,15 +60,37 @@
         <div class="main-posting-section">
             <button type="button" class="post-button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Post</span></button>
         </div>
-            
-        <div class="user-info-section">
-            <button type="button" class="user-info" (click)="logout()"><span>Welcome, {{ userProfile.username }}!</span></button>
-        </div>
 
         <!-- ###### Make actual toggle ###### -->
-        <input type="checkbox" class="checkbox" id="checkbox">
+        
 
     </div>
+
+    <button class="btn user-info" data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- <img src="/path/to/profile-image.jpg" alt="Profile Image" class="profile-image"> -->
+        <img class="profile-image" src="/assets/profile_image_test.jpg" alt="Profile Image">
+        <span>Welcome, {{ userProfile.username }}!</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" (click)="logout()">Log out</a></li>
+        <li><a class="dropdown-item" href="#">View Profile</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Toggle Light-Dark</a></li>
+        <li><input type="checkbox" class="checkbox" id="checkbox"></li>
+        <li>
+            <!-- Rounded switch -->
+        </li>
+        <input type="checkbox" id="switch" onclick="event.stopPropagation();" /><label for="switch">Toggle</label>
+
+
+
+
+
+
+        
+    </ul>
+
+
 </div>
 
 

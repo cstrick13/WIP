@@ -3,12 +3,19 @@
 }
   
 #sidebar-wrapper {
+    
     min-height: 100vh;
     margin-left: 0rem;
+
+    /* INSERT COMMENTS HERE */
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
+
+    /* INSERT COMMENTS HERE */
+    display: flex;
+    flex-direction: column;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -51,6 +58,7 @@
 
 #sidebar-wrapper .list-group {
     width: 15rem;
+/*    flex-grow: 1;*/
 }
 
 #sidebar-wrapper .list-group-item {
@@ -143,19 +151,98 @@
 }
 
 .user-info {
-    background-color: #1b95e9;
-    color: white;
-    border: none;
-    width: 90%;
-    padding: 10px 20px;
-    margin: 10px 0;
+    padding: 10px;
     border-radius: 30px;
+    color: var(--bs-body-color);
+    font-size: 1.2rem;
+    transition: background-color 200ms;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    
+    border-style: none;
+    border: none;
     cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    transition: background-color 100ms;
+    overflow: hidden;
+    outline: none;
+    width: 100%; /* Ensure the button covers the entire width */
+    display: block; /* Make the button a block-level element */
+    margin-top: auto;
+    margin-bottom: 20px; /* Add space between the button and the bottom of the page */
+    display: flex;
+    align-items: center;
 }
 
 .user-info:hover {
-    background-color: #1a85d6;
+    background-color: var(--bs-tertiary-bg);
+}
+
+.profile-image {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 10px; /* Add space between the image and the text */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 200px;
+	height: 100px;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 90px;
+	height: 90px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input:checked + label {
+	background: #bada55;
+}
+
+input:checked + label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+label:active:after {
+	width: 130px;
 }

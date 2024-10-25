@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
         htmlElement?.setAttribute('data-bs-theme', 'light');
       }
     });
-    
+
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         this.userEmail = user.email; // Set the user's email
@@ -60,6 +60,17 @@ export class SidebarComponent implements OnInit {
       }
     } catch (e) {
       console.error('Error fetching document:', e);
+    }
+  }
+
+  changeTheme() {
+    const htmlElement = document.getElementById('htmlPage');
+
+    if (htmlElement?.getAttribute('data-bs-theme') === 'dark') {
+      htmlElement?.setAttribute('data-bs-theme', 'light');
+    }
+    else {
+      htmlElement?.setAttribute('data-bs-theme', 'dark');
     }
   }
   

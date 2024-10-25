@@ -9,7 +9,7 @@ class TestSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'f_name', 'l_name', 'bio']
+        fields = '__all__'
 
 class ConnectionSerializer(serializers.ModelSerializer):
     
@@ -26,7 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
-        fields = ['user', 'content', 'media_type', 'timestamp', 'likes']
+        fields = '__all__'
         
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:

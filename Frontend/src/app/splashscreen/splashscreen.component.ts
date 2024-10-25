@@ -62,6 +62,8 @@ export class SplashscreenComponent {
         console.log('User created successfully:', user);
         this.createUserProfile();
         Swal.fire('Success', 'Account created successfully!', 'success'); // Success alert
+        this.router.navigate(['/home']); // Navigate to home
+
       })
       .catch((error) => {
         console.error('Error creating user:', error.message);
@@ -120,6 +122,7 @@ export class SplashscreenComponent {
         console.log('User logged in:', userCredential.user);
         localStorage.setItem('isUserLoggedIn', 'true');
         Swal.fire('Success', 'Login successful!', 'success'); // Success alert
+        this.router.navigate(['/home']); // Navigate to home
       })
       .catch((error) => {
         this.errorMessage = 'Login failed: ' + error.message;
@@ -137,6 +140,7 @@ export class SplashscreenComponent {
         console.log('Google user logged in:', result.user.email);
         localStorage.setItem('isUserLoggedIn', 'true');
         Swal.fire('Success', 'Logged in with Google!', 'success'); // Success alert
+        this.router.navigate(['/home']); // Navigate to home
       })
       .catch(error => {
         this.errorMessage = 'Google Sign-In failed: ' + error.message;

@@ -11,6 +11,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
     HomeComponent,
     SplashscreenComponent,
     SidebarComponent,
-    RightSidebarComponent
+    RightSidebarComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,

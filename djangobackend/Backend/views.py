@@ -2,10 +2,12 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from django.http.response import JsonResponse
 from django.shortcuts import render
-
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import viewsets
+from django.db.models import Q
+
+from django.core.exceptions import ValidationError
 
 
 from Backend.serializers import (TestSerializer)
@@ -29,9 +31,16 @@ def createUser(request):
         user_data = JSONParser().parse(request)
         print("User Data: ",user_data) # DEBUG
         user_serializer = UserSerializer(data=user_data)
-        if user_serializer.is_valid():
-            user_serializer.save()
-            return JsonResponse("Added Successfully",safe=False)
+        try:
+            if user_serializer.is_valid(raise_exception=True):
+                user_serializer.save()
+                return JsonResponse("Added Successfully",safe=False)
+            else:
+                print("Failed to Add. User is not valid.") # DEBUG
+        except ValidationError as e:
+            print("Error: " + e) # DEBUG
+            return JsonResponse("Failed to Add",safe=False)
+            
         return JsonResponse("Failed to Add",safe=False)
     else:
         print("Failed to Add") # DEBUG
@@ -48,6 +57,62 @@ def createPost(request):
         return JsonResponse("Failed to Add",safe=False)
     else:
         return JsonResponse("Failed to Add. Not POST.",safe=False)
+    
+# Get all posts from a user
+@api_view(['POST'])
+def getPosts(request):
+    if request.method == 'POST':
+        user_id = JSONParser().parse(request)['userid']
+        posts = Post.objects.filter(userid=user_id)
+        post_serializer = PostSerializer(posts,many=True)
+        return JsonResponse(post_serializer.data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
+    
+
+@api_view(['POST'])
+def getRelaventFeed(request):
+    if request.method == 'POST':
+        
+        user_id = JSONParser().parse(request)['userid']
+        print("User ID: ",user_id)
+        
+        user = User.objects.get(userid=user_id)
+        user_preferences = user.selectedInterests
+        print("User Preferences: ",user_preferences)
+        
+        posts = Post.objects.all()
+        filtered_posts = [
+            post for post in posts 
+            if any(preference in post.tags for preference in user_preferences)
+        ]
+        print("\nPosts: ", filtered_posts)
+        
+        return JsonResponse(PostSerializer(filtered_posts,many=True).data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
+        
+        
+@api_view(['POST'])
+def getFollowingFeed(request):
+    if(request.method == 'POST'):
+        
+        user_id = JSONParser().parse(request)['userid']
+        print("User ID: ",user_id)
+        
+        # Get all connections
+        connections = Connection.objects.filter(follower=user_id)
+        connection_ids = connections.values_list('followed', flat=True)
+        print("Connections: ",connections)
+        
+        posts = Post.objects.filter(userid__in=connection_ids)
+        return JsonResponse(PostSerializer(posts,many=True).data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
+    
+
+
+
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

@@ -23,15 +23,7 @@ class Post(models.Model):
     media_type = models.CharField(max_length=15)
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField()
-    tags = models.CharField(max_length=255, blank=True)
-    
-    def get_tags(self):
-        """Returns the tags as a list of strings."""
-        return [tag.strip() for tag in self.tags.split(",") if tag]
-
-    def set_tags(self, tag_list):
-        """Sets the tags from a list of strings."""
-        self.tags = ",".join(tag_list)
+    tags = models.JSONField(blank=True, null=True)
     
     def __str__(self):
         return self.content[:50]

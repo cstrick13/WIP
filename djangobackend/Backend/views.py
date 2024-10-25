@@ -5,6 +5,7 @@ from django.shortcuts import render
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import viewsets
+from django.db.models import Q
 
 from django.core.exceptions import ValidationError
 
@@ -72,14 +73,32 @@ def getPosts(request):
 @api_view(['POST'])
 def getPostFeed(request):
     if request.method == 'POST':
-        posts = []
+        
         # Get all posts from connections
         user_id = JSONParser().parse(request)['userid']
         print("User ID: ",user_id)
         # Get all connections
         connections = Connection.objects.filter(follower=user_id)
+        connection_ids = connections.values_list('followed', flat=True)
+
         print("Connections: ",connections)
-        return JsonResponse("Added Successfully",safe=False)
+        
+        user = User.objects.get(userid=user_id)
+        user_preferences = user.selectedInterests
+        print("User Preferences: ",user_preferences)
+        
+        
+        posts = Post.objects.filter(userid_id__in=connection_ids)
+
+
+        filtered_posts = [
+            post for post in posts
+            if any(preference in post.tags for preference in user_preferences)
+        ]
+        
+        print("\nPosts: ", filtered_posts)
+        
+        return JsonResponse(PostSerializer(filtered_posts,many=True).data,safe=False)
     else:
         return JsonResponse("Failed to Get. Not POST.",safe=False)
         

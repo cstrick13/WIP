@@ -71,37 +71,47 @@ def getPosts(request):
     
 
 @api_view(['POST'])
-def getPostFeed(request):
+def getRelaventFeed(request):
     if request.method == 'POST':
         
-        # Get all posts from connections
         user_id = JSONParser().parse(request)['userid']
         print("User ID: ",user_id)
-        # Get all connections
-        connections = Connection.objects.filter(follower=user_id)
-        connection_ids = connections.values_list('followed', flat=True)
-
-        print("Connections: ",connections)
         
         user = User.objects.get(userid=user_id)
         user_preferences = user.selectedInterests
         print("User Preferences: ",user_preferences)
         
-        
-        posts = Post.objects.filter(userid_id__in=connection_ids)
-
-
+        posts = Post.objects.all()
         filtered_posts = [
-            post for post in posts
+            post for post in posts 
             if any(preference in post.tags for preference in user_preferences)
         ]
-        
         print("\nPosts: ", filtered_posts)
         
         return JsonResponse(PostSerializer(filtered_posts,many=True).data,safe=False)
     else:
         return JsonResponse("Failed to Get. Not POST.",safe=False)
         
+        
+@api_view(['POST'])
+def getFollowingFeed(request):
+    if(request.method == 'POST'):
+        
+        user_id = JSONParser().parse(request)['userid']
+        print("User ID: ",user_id)
+        
+        # Get all connections
+        connections = Connection.objects.filter(follower=user_id)
+        connection_ids = connections.values_list('followed', flat=True)
+        print("Connections: ",connections)
+        
+        posts = Post.objects.filter(userid__in=connection_ids)
+        return JsonResponse(PostSerializer(posts,many=True).data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
+    
+
+
 
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):

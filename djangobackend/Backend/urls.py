@@ -15,5 +15,6 @@ urlpatterns = [
    path('create-user/', views.createUser),
    path('create-post/', views.createPost),
    path('get-posts/', views.getPosts),
-   path('get-feed/', views.getPostFeed),
+   path('get-for-you-feed/', views.getRelaventFeed),
+   path('get-following-feed/', views.getFollowingFeed),
 ]

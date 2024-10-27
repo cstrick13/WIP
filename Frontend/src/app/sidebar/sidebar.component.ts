@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,8 +15,9 @@ export class SidebarComponent implements OnInit {
   userEmail: string | null = null; // User email
   userId: string | null = null; // User ID
   userProfile: any; // To store the user profile information
+  content:any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private sharedService:SharedService) {}
 
   ngOnInit(): void {
     const auth = getAuth();
@@ -49,9 +51,37 @@ export class SidebarComponent implements OnInit {
     }
   }
   
-  createPost() {
-    // Logic to create a post
-    console.log('Post button clicked');
+  async createPost() {
+    const content = this.content.trim();
+
+    if (!content) {
+        alert('Please enter some content before posting.');
+        return;
+    }
+
+    const postData = {
+      content: content,
+      userid: this.userId,
+    };
+
+    await this.sendPostToDjango(postData);
+}
+
+
+  sendPostToDjango(postData: any) {
+
+    const payload = {
+      ...postData
+    };
+    console.log(payload);
+    this.sharedService.createPost(payload).subscribe(
+      response => {
+        console.log('User post sent to Django successfully:', response);
+      },
+      error => {
+        console.error('Error sending post to Django:', error);
+      }
+    );
   }
 
   logout(): void {

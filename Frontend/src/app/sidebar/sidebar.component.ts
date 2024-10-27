@@ -90,6 +90,8 @@ export class SidebarComponent implements OnInit {
     };
 
     await this.sendPostToDjango(postData);
+
+    this.content = '';
 }
 
 

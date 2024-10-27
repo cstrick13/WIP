@@ -93,7 +93,7 @@
         <div class="postbox">
             <form id="postForm" (ngSubmit)="createPost()">
                 <div class="postbox_input">
-                    <textarea id="postTweet" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
+                    <textarea id="postTweet" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required required style="width: 100%; height: 200px;" ></textarea>
                 </div>
                 <button class="postbox_button" type="submit">Post</button>
             </form>

@@ -61,11 +61,11 @@
       </div>
 
     <div class="postbox">
-        <form>
+        <form id="postForm" (ngSubmit)="createPost()">
             <div class="postbox_input">
-                <input type="text" placeholder="What's on your mind?" />
+                <input type="text" id="postTweet" name="content" [(ngModel)]="content" placeholder="What's on your mind?" required />
             </div>
-            <button class="postbox_button">Post</button>
+            <button class="postbox_button" type="submit" >Post</button>
         </form>
     </div>
     -->

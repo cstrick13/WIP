@@ -20,9 +20,10 @@ class User(models.Model):
 class Post(models.Model):
     userid = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
-    media_type = models.CharField(max_length=15)
+    media_type = models.CharField(max_length=15,blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    likes = models.IntegerField()
+    likes = models.IntegerField(blank=True, null=True)
+    tags = models.JSONField(blank=True, null=True)
     
     def __str__(self):
         return self.content[:50]

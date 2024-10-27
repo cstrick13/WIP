@@ -23,7 +23,8 @@ class ConnectionSerializer(serializers.ModelSerializer):
         return data
     
 class PostSerializer(serializers.ModelSerializer):
-    
+    userid = UserSerializer()  # Nest the UserSerializer here
+
     class Meta:
         model = Post
         fields = '__all__'

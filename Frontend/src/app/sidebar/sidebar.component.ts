@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,12 +15,27 @@ export class SidebarComponent implements OnInit {
   userEmail: string | null = null; // User email
   userId: string | null = null; // User ID
   userProfile: any; // To store the user profile information
+  content:any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private sharedService:SharedService) {}
 
   ngOnInit(): void {
     const auth = getAuth();
-    
+    const themeToggleButton = document.getElementById('theme-toggle');
+
+    const htmlElement = document.getElementById('htmlPage');
+    const checkbox = document.getElementById('checkbox') as HTMLInputElement;
+
+    checkbox?.addEventListener("change", () => {
+      if (checkbox.checked) {
+        // toggle dark mode on checkbox change
+        htmlElement?.setAttribute('data-bs-theme', 'dark');
+      }
+      else {
+        htmlElement?.setAttribute('data-bs-theme', 'light');
+      }
+    });
+
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         this.userEmail = user.email; // Set the user's email
@@ -48,10 +64,51 @@ export class SidebarComponent implements OnInit {
       console.error('Error fetching document:', e);
     }
   }
+
+  changeTheme() {
+    const htmlElement = document.getElementById('htmlPage');
+
+    if (htmlElement?.getAttribute('data-bs-theme') === 'dark') {
+      htmlElement?.setAttribute('data-bs-theme', 'light');
+    }
+    else {
+      htmlElement?.setAttribute('data-bs-theme', 'dark');
+    }
+  }
   
-  createPost() {
-    // Logic to create a post
-    console.log('Post button clicked');
+  async createPost() {
+    const content = this.content.trim();
+
+    if (!content) {
+        alert('Please enter some content before posting.');
+        return;
+    }
+
+    const postData = {
+      content: content,
+      userid: this.userId,
+    };
+
+    await this.sendPostToDjango(postData);
+
+    this.content = '';
+}
+
+
+  sendPostToDjango(postData: any) {
+
+    const payload = {
+      ...postData
+    };
+    console.log(payload);
+    this.sharedService.createPost(payload).subscribe(
+      response => {
+        console.log('User post sent to Django successfully:', response);
+      },
+      error => {
+        console.error('Error sending post to Django:', error);
+      }
+    );
   }
 
   logout(): void {

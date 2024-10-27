@@ -65,6 +65,9 @@ export class HomeComponent {
     };
 
     await this.sendPostToDjango(postData);
+
+    this.content = '';
+
 }
 
 

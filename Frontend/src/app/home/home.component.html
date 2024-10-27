@@ -9,7 +9,7 @@
     <div class="post-box">
         <div class="d-flex">
           <img class="profile-image" src="/assets/profile_image_test.jpg" alt="Profile Image">
-          <textarea class="form-control" rows="1" placeholder="What is happening?!"></textarea>
+          <textarea class="form-control" rows="1" placeholder="What is happening?!" [(ngModel)]="content" name="postContent"></textarea>
         </div>
   
         <!-- Icons and Post button -->
@@ -22,7 +22,7 @@
             <i class="fas fa-gem"></i>
             <i class="fas fa-gem"></i>
           </div>
-          <button type="button" class="post-button"><span>Post</span></button>
+          <button type="button" class="post-button" (click)="createPost()"><span>Post</span></button>
           <!-- <button class="btn btn-primary">Post</button> -->
         </div>
       </div>

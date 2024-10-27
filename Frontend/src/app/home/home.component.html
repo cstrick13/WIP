@@ -7,29 +7,35 @@
 
     <!-- Post Box -->
     <div class="post-box">
-        <div class="d-flex">
-          <img class="profile-image" src="/assets/profile_image_test.jpg" alt="Profile Image">
-          <textarea class="form-control" rows="1" placeholder="What is happening?!"></textarea>
-        </div>
-  
-        <!-- Icons and Post button -->
-        <div class="icon-group mt-2">
-          <div class="d-flex">
-            <i class="fas fa-gem"></i>
-            <i class="fas fa-gem"></i>
-            <i class="fas fa-gem"></i>
-            <i class="fas fa-gem"></i>
-            <i class="fas fa-gem"></i>
-            <i class="fas fa-gem"></i>
-          </div>
-          <button type="button" class="post-button"><span>Post</span></button>
-          <!-- <button class="btn btn-primary">Post</button> -->
-        </div>
+      <div class="d-flex">
+        <img class="profile-image" src="/assets/profile_image_test.jpg" alt="Profile Image">
+        <form (ngSubmit)="createPost()">
+              <textarea class="form-control" rows="1" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
+          <button class="post-button" type="submit">Post</button>
+      </form>
       </div>
-  
-      <!-- Show posts -->
-      <div class="show-posts mt-3">Show 35 posts</div>
+
+
+      <!-- Icons and Post button -->
+      <div class="icon-group mt-2">
+        <div class="d-flex">
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+        </div>
+        <!--
+        <button type="subm" class="post-button"><span>Post</span></button>
+        -->
+        <!-- <button class="btn btn-primary">Post</button> -->
+      </div>
     </div>
+
+    <!-- Show posts -->
+    <div class="show-posts mt-3">Show 35 posts</div>
+  </div>
 
 
 

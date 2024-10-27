@@ -8,7 +8,7 @@
     <!-- Post Box -->
     <div class="post-box">
       <div class="d-flex">
-        <img class="profile-image" src="/assets/profile_image_test.jpg" alt="Profile Image">
+        <img class="profile-image" [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="">
         <form (ngSubmit)="createPost()">
               <textarea class="form-control" rows="1" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
           <button class="post-button" type="submit">Post</button>
@@ -33,8 +33,33 @@
       </div>
     </div>
 
-    <!-- Show posts -->
-    <div class="show-posts mt-3">Show 35 posts</div>
+    <div class="content" *ngFor="let post of posts">
+      <mat-card class="post-card">
+        <mat-card-header>
+          <mat-card-title class="title">{{ post.username }}</mat-card-title>
+          <mat-card-subtitle class="subtitle">{{ post.createdAt | date: 'short' }}</mat-card-subtitle>
+        </mat-card-header>
+    
+        <mat-card-content>
+          <div class="post-image-container" *ngIf="post.imageUrl">
+            <img [src]="post.imageUrl" alt="Post image" class="post-image">
+          </div>
+          <div class="post-actions">
+            <div class="action like-action">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="action comment-action">
+              <i class="fas fa-comment"></i>
+            </div>
+          </div>
+          <div class="like-count">
+            <span>{{ post.likes ?? 0 }} Likes</span>
+          </div>
+          <p class="post-comment"><strong>{{ post.username }}</strong> {{ post.content }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    
   </div>
 
 

@@ -65,7 +65,7 @@
     <!-- User Info -->
     <button class="btn user-info" data-bs-toggle="dropdown" aria-expanded="false">
         <!-- <img src="/path/to/profile-image.jpg" alt="Profile Image" class="profile-image"> -->
-        <img class="profile-image" src="/assets/profile_image_test.jpg" alt="Profile Image">
+        <img class="profile-image" [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="">
         <span>Welcome, {{ userProfile.username }}!</span>
     </button>
 

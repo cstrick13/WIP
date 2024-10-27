@@ -7,6 +7,197 @@
     flex: 1;
     height: 100vh;*/
 }
+.content{
+  display: flex;
+  justify-content: center;
+}
+.post-card {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: aliceblue;
+}
+
+.mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #757575;
+}
+
+.post-image-container {
+  margin-top: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically if needed */
+}
+
+.post-image {
+  width: 80%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.post-comment {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Styling for the actions */
+.post-actions {
+  display: flex;
+  align-items: center; /* Align icons vertically */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+}
+
+/* Each action */
+.action {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #757575;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-right: 5px; /* Reduces the space between icons */
+}
+
+.action i {
+  margin-right: 6px; /* Slightly closer icon and text */
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for the like button */
+.like-action:hover {
+  color: red;
+}
+
+.like-action:hover i {
+  color: red;
+}
+
+/* Comment icon shouldn't change color */
+.comment-action:hover {
+  color: #757575; /* Ensures the comment text doesn't change color */
+}
+
+.comment-action i {
+  color: #757575; /* Ensures the comment icon doesn't change color */
+}
+
+/* Additional padding for text below the post */
+.post-comment {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.like-count {
+  font-size: 14px;
+  color: #757575;
+ 
+  margin-top: 5px; /* Adds a small gap between the actions and the like count */
+}
+.hidden {
+  display: none;
+}
+
+.comments-section {
+  margin-top: 10px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
+
+.view-comments-text {
+  cursor: pointer;
+  color: #8e8e8e;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.view-comments-text:hover {
+  color: #000;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.comment-content {
+  background-color: #f9f9f9;
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 85%;
+}
+
+.comment-text {
+  font-size: 14px;
+  margin: 0;
+  color: #262626;
+}
+
+.comment-text strong {
+  font-weight: 600;
+  color: #262626;
+}
+/* General styles for replies section */
+.replies-section {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* Styling for each reply */
+.reply {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for replies */
+.reply:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styling */
+.reply-header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Text styling */
+.reply-text {
+  margin: 0;
+  color: #333;
+}
 
   .post-box {
     background-color: var(--pirmary-bg);

@@ -16,10 +16,14 @@ export class HomeComponent {
   userId: string | null = null; // User ID
   userProfile: any; // To store the user profile information
   content:any;
+  posts: any[] = []; // Changed to `any[]` to handle flexible post structure
+  lastVisiblePost: any = null;
+  isLoading = false;
 
   constructor(private router: Router, private sharedService:SharedService) {}
 
   ngOnInit(): void {
+    this.fetchPosts();
     const auth = getAuth();
     
     onAuthStateChanged(auth, async (user) => {
@@ -83,6 +87,24 @@ export class HomeComponent {
       }
     );
   }
+
+  fetchPosts() {
+    this.isLoading = true;
+  
+    this.sharedService.getAllPosts().subscribe(
+      (response) => {
+        this.posts = response; // Newest posts will be first due to backend ordering
+        console.log('Fetched posts in descending order by timestamp:', this.posts);
+      },
+      (error) => {
+        console.error('Error fetching posts:', error);
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
+  }
+  
 
 
 }

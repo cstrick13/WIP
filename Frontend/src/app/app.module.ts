@@ -9,6 +9,9 @@ import { environment } from './.env/environement.development';
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
@@ -23,6 +26,9 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     ProfilePageComponent
   ],
   imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

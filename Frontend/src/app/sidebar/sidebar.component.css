@@ -1,6 +1,23 @@
 :host {
     overflow-x: hidden;
 }
+.modal-content {
+    background-color: black; /* Set modal background to black */
+    color: white; /* Change text color to white for visibility */
+}
+
+.modal-header,
+.modal-footer {
+    border-color: rgba(255, 255, 255, 0.1); /* Optional: set a subtle border color */
+}
+
+.modal-title {
+    color: white; /* Ensure the modal title is white */
+}
+
+.form-label {
+    color: white; /* Ensure form labels are white */
+}
   
 #sidebar-wrapper {
     

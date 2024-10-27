@@ -26,6 +26,8 @@
     outline: none;
     box-shadow: none;
     font-size: 20px;
+    width: 100%;
+    resize: none;
 }
   .tabs {
     border-bottom: 1px solid #333;

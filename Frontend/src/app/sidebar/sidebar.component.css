@@ -2,8 +2,8 @@
     overflow-x: hidden;
 }
 .modal-content {
-    background-color: black; /* Set modal background to black */
-    color: white; /* Change text color to white for visibility */
+    background-color: var(--bs-body-bg);; /* Set modal background to black */
+    color: var(--bs-body-color);; /* Change text color to white for visibility */
 }
 
 .modal-header,
@@ -12,11 +12,11 @@
 }
 
 .modal-title {
-    color: white; /* Ensure the modal title is white */
+    color: var(--bs-body-color); /* Ensure the modal title is white */
 }
 
 .form-label {
-    color: white; /* Ensure form labels are white */
+    color: var(--bs-body-color); /* Ensure form labels are white */
 }
   
 #sidebar-wrapper {
@@ -164,6 +164,23 @@
 }
 
 .post-button:hover {
+    background-color: #1a85d6;
+}
+
+.post-button-modal {
+    background-color: #1b95e9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 200ms;
+}
+
+.post-button-modal:hover {
     background-color: #1a85d6;
 }
 

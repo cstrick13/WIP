@@ -31,7 +31,31 @@
   <div class="cube"></div>
 
   <!-- Modal -->
-
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Sign In</h1>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="login()" class="login-form">
+            <div class="form-group">
+              <label for="email" class="label">Email</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="password" class="label">Password</label>
+              <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+            </div>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary btn-block" data-bs-dismiss="modal" aria-label="Close">Log In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="modal fade" id="createAccountModal" tabindex="-1" aria-labelledby="createAccountLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">

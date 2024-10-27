@@ -4,21 +4,6 @@
 .modal-content {
     background-color: black; /* Set modal background to black */
     color: white; /* Change text color to white for visibility */
-    /* Variables */
-    --main-text-color: rgb(255, 255, 255);
-    --twitter-blue: #1b95e9;
-    --twitter-blue-hover: #1a85d6;
-
-    display: block;                      
-    width: 250px;                      
-    height: 100vh;                    
-    border-right: .1px solid #ffffff;  
-    position: relative;                    
-    color: var(--main-text-color);                    
-}
-.modal-content {
-    background-color: black; /* Set modal background to black */
-    color: white; /* Change text color to white for visibility */
 }
 
 .modal-header,

@@ -7,7 +7,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 
 const routes: Routes = [  
   { path: 'splash', component: SplashscreenComponent, canActivate: [authGuard]},
-  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'home', component: HomeComponent},
   { path: 'profile-page', component: ProfilePageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to 'home' if no path is provided
   { path: '**', redirectTo: '/home' }];

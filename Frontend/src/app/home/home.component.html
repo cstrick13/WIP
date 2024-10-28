@@ -36,7 +36,7 @@
     <div class="content" *ngFor="let post of posts">
       <mat-card class="post-card">
         <mat-card-header>
-          <mat-card-title class="title"><strong>{{ post.userid.username }}</strong> {{ post.content }}</mat-card-title>
+          <mat-card-title class="title"><strong>{{ post.username }}</strong> {{ post.content }}</mat-card-title>
           <mat-card-subtitle class="subtitle">{{ post.timestamp | date: 'short' }}</mat-card-subtitle>
         </mat-card-header>
     

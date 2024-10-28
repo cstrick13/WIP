@@ -23,11 +23,12 @@ class ConnectionSerializer(serializers.ModelSerializer):
         return data
     
 class PostSerializer(serializers.ModelSerializer):
-    userid = UserSerializer()  # Nest the UserSerializer here
+    userid = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    username = serializers.CharField(source='userid.username', read_only=True)
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'userid', 'username', 'content', 'media_type', 'timestamp', 'likes', 'tags']
         
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:

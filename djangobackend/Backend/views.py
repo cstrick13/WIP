@@ -51,12 +51,15 @@ def createPost(request):
     if request.method == 'POST':
         post_data = JSONParser().parse(request)
         post_serializer = PostSerializer(data=post_data)
+
         if post_serializer.is_valid():
             post_serializer.save()
-            return JsonResponse("Added Successfully",safe=False)
-        return JsonResponse("Failed to Add",safe=False)
-    else:
-        return JsonResponse("Failed to Add. Not POST.",safe=False)
+            return JsonResponse({"success": True, "message": "Added Successfully"}, status=200)
+
+        # Return detailed validation errors if serializer fails
+        return JsonResponse({"success": False, "errors": post_serializer.errors, "message": "Failed to Add"}, status=400)
+
+    return JsonResponse({"success": False, "message": "Failed to Add. Not a POST request"}, status=405)
     
 # Get all posts from a user
 @api_view(['POST'])

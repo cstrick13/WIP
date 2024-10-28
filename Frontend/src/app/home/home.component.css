@@ -7,9 +7,10 @@
     flex: 1;
     height: 100vh;*/
 }
-.content{
-  display: flex;
-  justify-content: center;
+.post-container{
+  max-height: 700px; /* Set maximum height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 0 15px;
 }
 .post-card {
   margin-top: 40px;

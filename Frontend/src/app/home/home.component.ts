@@ -92,6 +92,15 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  likePost(postId: number): void {
+    this.sharedService.likePost(postId).subscribe(response => {
+      // Find the post and update its like count
+      const post = this.posts.find(p => p.id === postId);
+      if (post) {
+        post.likes = response.likes;
+      }
+    });
+  }
 
   fetchPosts() {
     this.sharedService.getAllPosts().subscribe(

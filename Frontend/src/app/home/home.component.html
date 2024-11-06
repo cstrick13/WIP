@@ -55,7 +55,7 @@
             <img [src]="post.media" alt="Post image" class="post-image">
           </div>
           <div class="post-actions">
-            <div class="action like-action">
+            <div class="action like-action" (click)="likePost(post.id)">
               <i class="fas fa-heart"></i>
             </div>
             <div class="action comment-action">

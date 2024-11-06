@@ -46,6 +46,24 @@ def createUser(request):
         print("Failed to Add") # DEBUG
         return JsonResponse("Failed to Add. Not POST.",safe=False)
 
+@csrf_exempt
+def increment_like(request, post_id):
+    try:
+        # Get the post by ID
+        post = Post.objects.get(id=post_id)
+
+        # If likes is None, set it to 0 before incrementing
+        if post.likes is None:
+            post.likes = 0
+
+        # Increment like count
+        post.likes += 1
+        post.save()
+
+        return JsonResponse({'message': 'Post liked successfully', 'likes': post.likes})
+    except Post.DoesNotExist:
+        return JsonResponse({'error': 'Post not found'}, status=404)
+
 @api_view(['POST'])
 def createPost(request):
     if request.method == 'POST':

@@ -133,6 +133,7 @@ def getSimilarUsers(request):
             if user.selectedInterests and any(preference in user.selectedInterests for preference in user_preferences)
         ]
         print("\nUsers: ", filtered_users)
+        
         # Pick 4 random users from the list to return
         import random
         random.shuffle(filtered_users)

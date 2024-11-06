@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 
 from Backend.serializers import (TestSerializer)
 from Backend.models import (Test)
-from .models import User, Connection, Post, Reply
+from .models import User, Connection, Post, Reply, Progress
 
 from .serializers import UserSerializer, ConnectionSerializer, PostSerializer, ReplySerializer
 
@@ -112,7 +112,50 @@ def getFollowingFeed(request):
         return JsonResponse(PostSerializer(posts,many=True).data,safe=False)
     else:
         return JsonResponse("Failed to Get. Not POST.",safe=False)
-    
+
+
+@api_view(['POST', 'PUT'])
+def getProgress(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        user_id = data.get('userid')
+
+        if user_id is not None:
+            progress = Progress.objects.filter(userid=user_id)
+
+            # Check if any progress records exist
+            if progress.exists():
+                progress_serializer = ProgressSerializer(progress, many=True)
+                return JsonResponse(progress_serializer.data, safe=False)
+            else:
+                return JsonResponse({"message": "No progress records found for the user."}, status=404)
+        else:
+            return JsonResponse({"error": "User ID is required."}, status=400)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        user_id = data.get('userid')
+        workout_type = data.get('workout_type')
+        new_progress = data.get('current_progress')
+
+        if not user_id or not workout_type or new_progress is None:
+            return JsonResponse({"error": "User ID, workout type, and current progress are required."}, status=400)
+
+        try:
+            # Get the specific progress record for the user and workout type
+            progress = Progress.objects.get(userid=user_id, workout_type=workout_type)
+            progress.current_progress = new_progress
+            progress.save()
+
+            # Return the updated progress
+            progress_serializer = ProgressSerializer(progress)
+            return JsonResponse(progress_serializer.data, safe=False, status=status.HTTP_200_OK)
+
+        except Progress.DoesNotExist:
+            return JsonResponse({"error": "Progress record not found."}, status=404)
+
+    else:
+        return JsonResponse({"error": "Method not allowed."}, status=405)
 
 
 

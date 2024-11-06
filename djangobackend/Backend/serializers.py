@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Test, User, Connection, Post, Reply
+from .models import Test, User, Connection, Post, Reply, Progress
 
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,5 +33,13 @@ class PostSerializer(serializers.ModelSerializer):
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
+        fields = '__all__'
+
+class ProgressSerializer(serializers.ModelSerializer):
+    userid = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    username = serializers.CharField(source='userid.username', read_only=True)
+
+    class Meta:
+        model = Progress
         fields = '__all__'
         

@@ -19,4 +19,6 @@ urlpatterns = [
    path('get-following-feed/', views.getFollowingFeed),
    path('posts/<int:post_id>/like/', views.increment_like, name='increment_like'),
    path('get-similar-users/', views.getSimilarUsers),
+   path('search-users/', views.searchUsers),
+   path('search-posts/', views.searchPosts),
 ]

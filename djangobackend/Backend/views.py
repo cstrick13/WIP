@@ -125,14 +125,11 @@ def getSimilarUsers(request):
         print("User Preferences: ",user_preferences)
         
         users = User.objects.all()
-        print("\nAll Users: ", users)
-        for user in users:
-            print(user.selectedInterests)
+
         filtered_users = [
             user for user in users 
             if user.selectedInterests and any(preference in user.selectedInterests for preference in user_preferences)
         ]
-        print("\nUsers: ", filtered_users)
         
         # Pick 4 random users from the list to return
         import random

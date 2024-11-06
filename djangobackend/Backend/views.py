@@ -157,6 +157,32 @@ def getSimilarUsers(request):
         return JsonResponse(UserSerializer(filtered_users,many=True).data,safe=False)
     else:
         return JsonResponse("Failed to Get. Not POST.",safe=False)
+    
+@api_view(['GET'])
+def searchUsers(request):
+    if(request.method == 'GET'):
+        search_query = JSONParser().parse(request)['search_query']
+        print("Search Query: ",search_query)
+        
+        users = User.objects.filter(Q(username__icontains=search_query))
+        print("Users: ",users)
+        
+        return JsonResponse(UserSerializer(users,many=True).data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not GET.",safe=False)
+
+api_view(['GET'])
+def searchPosts(request):
+    if(request.method == 'GET'):
+        search_query = JSONParser().parse(request)['search_query']
+        print("Search Query: ",search_query)
+        
+        posts = Post.objects.filter(Q(content__icontains=search_query))
+        print("Posts: ",posts)
+        
+        return JsonResponse(PostSerializer(posts,many=True).data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not GET.",safe=False)
 
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):

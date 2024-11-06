@@ -23,4 +23,8 @@ export class SharedService {
   createPost(postData: any): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/create-post/`, postData);  
   }
+  likePost(postId: number): Observable<any> {
+    return this.http.post<any>(`${this.APIUrl}/posts/${postId}/like/`, {});
+  }
+
 }

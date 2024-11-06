@@ -6,6 +6,123 @@
     color: var(--bs-body-color);; /* Change text color to white for visibility */
 }
 
+.modal-body .post-box {
+    padding: 20px;
+    background-color: var(--bs-body-bg); /* Match modal background */
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for better separation */
+}
+
+.post-box .d-flex {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 15px; /* Add space between items */
+}
+
+.post-box .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensure image maintains aspect ratio */
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-form textarea {
+    resize: none;
+    height: 120px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add light shadow for input area */
+}
+
+.post-form textarea:focus {
+    outline: none;
+    border-color: #1b95e9;
+    box-shadow: 0 0 5px rgba(27, 149, 233, 0.5);
+}
+
+.custom-file-input {
+    position: relative;
+    margin-top: 10px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-file-input .file-input {
+    display: none;
+}
+
+.custom-file-input .file-icon {
+    font-size: 24px;
+    color: #1b95e9;
+    cursor: pointer;
+}
+
+.preview-container {
+    margin-top: 15px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.preview-container .preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 12px;
+    object-fit: contain;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow to image preview */
+}
+
+.post-button {
+    background-color: #1b95e9;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 200ms;
+    text-align: center;
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-button:hover {
+    background-color: #1a85d6;
+}
+
+.post-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.post-form .post-button {
+    margin-top: 20px;
+    align-self: center; /* Center the post button */
+}
+
+/* Add hover effect for file input icon */
+.custom-file-input:hover .file-icon {
+    color: #1678c2;
+}
+
 .modal-header,
 .modal-footer {
     border-color: rgba(255, 255, 255, 0.1); /* Optional: set a subtle border color */

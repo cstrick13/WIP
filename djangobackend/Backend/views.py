@@ -114,7 +114,31 @@ def getFollowingFeed(request):
         return JsonResponse("Failed to Get. Not POST.",safe=False)
     
 
+@api_view(['GET'])
+def getSimilarUsers(request):
+    if(request.method == 'GET'):
+        user_id = JSONParser().parse(request)['userid']
+        print("User ID: ",user_id)
+        
+        user = User.objects.get(userid=user_id)
+        user_preferences = user.selectedInterests
+        print("User Preferences: ",user_preferences)
+        
+        users = User.objects.all()
 
+        filtered_users = [
+            user for user in users 
+            if user.selectedInterests and any(preference in user.selectedInterests for preference in user_preferences)
+        ]
+        
+        # Pick 4 random users from the list to return
+        import random
+        random.shuffle(filtered_users)
+        filtered_users = filtered_users[:4]
+        
+        return JsonResponse(UserSerializer(filtered_users,many=True).data,safe=False)
+    else:
+        return JsonResponse("Failed to Get. Not POST.",safe=False)
 
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):

@@ -171,7 +171,7 @@ def searchUsers(request):
     else:
         return JsonResponse("Failed to Get. Not GET.",safe=False)
 
-api_view(['GET'])
+@api_view(['GET'])
 def searchPosts(request):
     if(request.method == 'GET'):
         search_query = JSONParser().parse(request)['search_query']

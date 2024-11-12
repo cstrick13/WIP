@@ -1,28 +1,42 @@
 <div class="progress-page">
-    <h1>Your Progress</h1>
+    <h1>View Work in Progress</h1>
 
-    <!-- Button to show/hide the new progress form -->
-    <button (click)="showNewProgressForm = !showNewProgressForm" class="btn btn-primary">
-        {{ showNewProgressForm ? 'Cancel' : 'Add New Progress' }}
+    <!-- Button to trigger modal -->
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProgressModal">
+        Add New Progress
     </button>
 
-    <!-- New Progress Form -->
-    <div *ngIf="showNewProgressForm" class="new-progress-form">
-        <form (ngSubmit)="createNewProgress()">
-            <div>
-                <label for="workoutType">Workout Type:</label>
-                <input type="text" [(ngModel)]="newProgress.workoutType" name="workoutType" required>
+    <!-- Modal for adding new progress -->
+    <div class="modal fade" id="addProgressModal" tabindex="-1" aria-labelledby="addProgressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProgressModalLabel">Add New Progress</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="createNewProgress()">
+                        <div class="mb-3">
+                            <label for="workoutType" class="form-label">Workout Type:</label>
+                            <input type="text" [(ngModel)]="newProgress.workoutType" name="workoutType" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="progressGoal" class="form-label">Goal:</label>
+                            <input type="number" [(ngModel)]="newProgress.progressGoal" name="progressGoal" class="form-control" required min="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="currentProgress" class="form-label">Current Progress:</label>
+                            <input type="number" [(ngModel)]="newProgress.currentProgress" name="currentProgress" class="form-control" required min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label for="currentProgress" class="form-label">Private:</label>
+                            <input type="checkbox" id="isPublic" name="isPublic" [(ngModel)]="newProgress.privateOrPublic">
+                        </div>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create Progress</button>
+                    </form>
+                </div>
             </div>
-            <div>
-                <label for="progressGoal">Goal:</label>
-                <input type="number" [(ngModel)]="newProgress.progressGoal" name="progressGoal" required min="1">
-            </div>
-            <div>
-                <label for="currentProgress">See the Work In Progress:</label>
-                <input type="number" [(ngModel)]="newProgress.currentProgress" name="currentProgress" required min="0">
-            </div>
-            <button type="submit" class="btn btn-success">Create Progress</button>
-        </form>
+        </div>
     </div>
 
     <!-- List of existing progress bars -->

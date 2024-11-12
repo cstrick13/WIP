@@ -6,6 +6,7 @@ import { SharedService } from '../shared.service';
   templateUrl: './progress-page.component.html',
   styleUrls: ['./progress-page.component.css']
 })
+
 export class ProgressPageComponent implements OnInit {
   progressRecords: any[] = [];
   isUpdating = false;
@@ -13,7 +14,8 @@ export class ProgressPageComponent implements OnInit {
   newProgress = { 
     workoutType: '',
     progressGoal: 0,
-    currentProgress: 0
+    currentProgress: 0,
+    privateOrPublic: false
   };
 
   constructor(private sharedService: SharedService) {}
@@ -55,7 +57,7 @@ export class ProgressPageComponent implements OnInit {
         console.log('New progress created:', response);
         this.getProgressRecords();  // Refresh the progress records
         this.showNewProgressForm = false;
-        this.newProgress = { workoutType: '', progressGoal: 0, currentProgress: 0 };
+        this.newProgress = { workoutType: '', progressGoal: 0, currentProgress: 0, privateOrPublic: false};
       },
       error: (error) => {
         console.error('Error creating progress:', error);
@@ -82,3 +84,4 @@ export class ProgressPageComponent implements OnInit {
     });
   }
 }
+

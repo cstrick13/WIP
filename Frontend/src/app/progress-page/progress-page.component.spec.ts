@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProgressPageComponent } from './progress-page.component';
-import { SharedService } from '../shared.service';  // Use SharedService
+import { SharedService } from '../shared.service'; 
 
 describe('ProgressPageComponent', () => {
   let component: ProgressPageComponent;
@@ -13,7 +13,7 @@ describe('ProgressPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProgressPageComponent],
       imports: [HttpClientTestingModule],
-      providers: [SharedService]  // Inject SharedService
+      providers: [SharedService]
     })
     .compileComponents();
 
@@ -49,6 +49,12 @@ describe('ProgressPageComponent', () => {
   it('should update progress record', () => {
     const workoutType = 'Running';
     const currentProgress = 6;
+
+    component.updateProgress(workoutType, currentProgress);
+    const req = httpMock.expectOne(`${sharedService.APIUrl}/progress/`);
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual({ workout_type: workoutType, current_progress: currentProgress });
+    req.flush({ success: true });
 
   });
 });

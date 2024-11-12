@@ -1,0 +1,57 @@
+<div class="progress-page">
+    <h1>Your Progress</h1>
+
+    <!-- Button to show/hide the new progress form -->
+    <button (click)="showNewProgressForm = !showNewProgressForm" class="btn btn-primary">
+        {{ showNewProgressForm ? 'Cancel' : 'Add New Progress' }}
+    </button>
+
+    <!-- New Progress Form -->
+    <div *ngIf="showNewProgressForm" class="new-progress-form">
+        <form (ngSubmit)="createNewProgress()">
+            <div>
+                <label for="workoutType">Workout Type:</label>
+                <input type="text" [(ngModel)]="newProgress.workoutType" name="workoutType" required>
+            </div>
+            <div>
+                <label for="progressGoal">Goal:</label>
+                <input type="number" [(ngModel)]="newProgress.progressGoal" name="progressGoal" required min="1">
+            </div>
+            <div>
+                <label for="currentProgress">See the Work In Progress:</label>
+                <input type="number" [(ngModel)]="newProgress.currentProgress" name="currentProgress" required min="0">
+            </div>
+            <button type="submit" class="btn btn-success">Create Progress</button>
+        </form>
+    </div>
+
+    <!-- List of existing progress bars -->
+    <div *ngFor="let progress of progressRecords" class="progress-item">
+        <h3>{{ progress.workoutType }}</h3>
+        <p>Goal: {{ progress.progressGoal }}</p>
+
+        <!-- Progress bar based on current progress -->
+        <div class="progress">
+            <div class="progress-bar"
+                 [style.width]="getProgressPercentage(progress.currentProgress, progress.progressGoal) + '%'"
+                 role="progressbar"
+                 [attr.aria-valuenow]="progress.currentProgress"
+                 [attr.aria-valuemin]="0"
+                 [attr.aria-valuemax]="progress.progressGoal">
+                {{ progress.currentProgress }} / {{ progress.progressGoal }}
+            </div>
+        </div>
+
+        <!-- Update form -->
+        <form (ngSubmit)="updateProgress(progress.workoutType, progress.newProgress)">
+            <label for="newProgress">Update Progress:</label>
+            <input type="number" [(ngModel)]="progress.newProgress" name="newProgress" required min="0" [max]="progress.progressGoal">
+            <button type="submit" [disabled]="isUpdating">Update</button>
+        </form>
+
+        <!-- Loading indicator -->
+        <div *ngIf="isUpdating" class="loading">
+            Updating progress...
+        </div>
+    </div>
+</div>

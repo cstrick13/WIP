@@ -14,7 +14,7 @@ from Backend.serializers import (TestSerializer)
 from Backend.models import (Test)
 from .models import User, Connection, Post, Reply, Progress
 
-from .serializers import UserSerializer, ConnectionSerializer, PostSerializer, ReplySerializer
+from .serializers import UserSerializer, ConnectionSerializer, PostSerializer, ReplySerializer, ProgressSerializer
 
 #Create your views here.
 
@@ -176,3 +176,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class ReplyViewSet(viewsets.ModelViewSet):
     queryset = Reply.objects.all()
     serializer_class = ReplySerializer
+
+class ProgressViewSet(viewsets.ModelViewSet):
+    queryset = Progress.objects.all()
+    serializer_class = ProgressSerializer

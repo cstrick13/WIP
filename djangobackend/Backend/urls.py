@@ -7,6 +7,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'connections', views.ConnectionViewSet)
 router.register(r'posts', views.PostViewSet)
 router.register(r'replies', views.ReplyViewSet)
+router.register(r'progress', views.ProgressViewSet)
 
 urlpatterns = [
    path('', include(router.urls)),

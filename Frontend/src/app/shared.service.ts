@@ -21,6 +21,21 @@ export class SharedService {
   }
 
   createPost(postData: any): Observable<any> {
-    return this.http.post<any>(`${this.APIUrl}/create-post/`, postData);  
+    return this.http.post<any>(`${this.APIUrl}/create-post/`, postData);
   }
+
+  getProgress(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/progress/`);
+  }
+
+  updateProgress(workoutType: string, currentProgress: number): Observable<any> {
+    const payload = { workout_type: workoutType, current_progress: currentProgress };
+    return this.http.put<any>(`${this.APIUrl}/progress/`, payload);
+  }
+
+  createProgress(progressData: any): Observable<any> {
+    console.log('Progress data being sent:', progressData);  // Log data before sending
+    return this.http.post<any>(`${this.APIUrl}/progress/`, progressData);
+  }
+  
 }

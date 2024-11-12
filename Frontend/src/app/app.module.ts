@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProgressPageComponent } from './progress-page/progress-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     SplashscreenComponent,
     SidebarComponent,
     RightSidebarComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    ProgressPageComponent
   ],
   imports: [
     MatCardModule,

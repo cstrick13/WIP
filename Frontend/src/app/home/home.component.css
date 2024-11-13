@@ -7,25 +7,6 @@
     flex: 1;
     height: 100vh;*/
 }
-/* Container for the reply section */
-.reply {
-  color: #000000; /* White text */
-}
-
-/* Hover effect to make it interactive */
-.reply:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-
-/* Optional: Add a separator between replies */
-.reply + .reply {
-  border-top: 1px solid #444; /* Darker separator for contrast */
-  padding-top: 1rem;
-  margin-top: 1.5rem;
-}
-
 .preview-container {
   margin-top: 10px;
   display: flex;

@@ -26,13 +26,5 @@ export class SharedService {
   likePost(postId: number): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/posts/${postId}/like/`, {});
   }
-  addReply(replyData: any): Observable<any> {
-    return this.http.post<any>(`${this.APIUrl}/add-reply/`, replyData);
-  }
-  
-  getReplies(postId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.APIUrl}/get-replies/?post_id=${postId}`);
-  }
-  
 
 }

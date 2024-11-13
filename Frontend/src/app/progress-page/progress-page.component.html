@@ -29,10 +29,6 @@
                 <label for="currentProgress" class="form-label">Current Progress:</label>
                 <input type="number" [(ngModel)]="newProgress.currentProgress" name="currentProgress" class="form-control" required min="0">
               </div>
-              <div class="mb-3">
-                <label for="privateOrPublic" class="form-label">Private:</label>
-                <input type="checkbox" id="privateOrPublic" name="privateOrPublic" [(ngModel)]="newProgress.privateOrPublic">
-              </div>
               <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create Progress</button>
             </form>
           </div>

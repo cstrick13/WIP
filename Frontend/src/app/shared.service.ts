@@ -17,6 +17,10 @@ export class SharedService {
     return this.http.get<any[]>(`${this.APIUrl}/posts/`);
   }
 
+  getAllReplies(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/replies/`);
+  }
+
   getAllUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.APIUrl}/users/`);
   }

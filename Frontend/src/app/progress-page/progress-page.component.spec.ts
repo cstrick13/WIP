@@ -50,7 +50,7 @@ describe('ProgressPageComponent', () => {
     const workoutType = 'Running';
     const currentProgress = 6;
 
-    component.updateProgress(workoutType, currentProgress);
+    component.updateProgress(currentProgress);
     const req = httpMock.expectOne(`${sharedService.APIUrl}/progress/`);
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual({ workout_type: workoutType, current_progress: currentProgress });

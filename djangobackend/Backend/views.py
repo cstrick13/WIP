@@ -114,7 +114,7 @@ def getFollowingFeed(request):
         return JsonResponse("Failed to Get. Not POST.",safe=False)
 
 
-@api_view(['POST', 'PUT'])
+@api_view(['GET', 'POST', 'PUT'])
 def getProgress(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
@@ -122,8 +122,6 @@ def getProgress(request):
 
         if user_id is not None:
             progress = Progress.objects.filter(userid=user_id)
-
-            # Check if any progress records exist
             if progress.exists():
                 progress_serializer = ProgressSerializer(progress, many=True)
                 return JsonResponse(progress_serializer.data, safe=False)
@@ -135,28 +133,30 @@ def getProgress(request):
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         user_id = data.get('userid')
-        workout_type = data.get('workout_type')
         new_progress = data.get('current_progress')
+        print("helo")
 
-        if not user_id or not workout_type or new_progress is None:
-            return JsonResponse({"error": "User ID, workout type, and current progress are required."}, status=400)
+        #if not user_id or not workout_type or new_progress is None:
+            #return JsonResponse({"error": "User ID, workout type, and current progress are required."}, status=400)
 
-        try:
-            # Get the specific progress record for the user and workout type
-            progress = Progress.objects.get(userid=user_id, workout_type=workout_type)
-            progress.current_progress = new_progress
-            progress.save()
+        #try:
+            #progress = Progress.objects.get(userid=user_id, workout_type=workout_type)
+            #progress.current_progress = new_progress
+            #progress.save()
 
-            # Return the updated progress
-            progress_serializer = ProgressSerializer(progress)
-            return JsonResponse(progress_serializer.data, safe=False, status=status.HTTP_200_OK)
+            #progress_serializer = ProgressSerializer(progress)
+            #return JsonResponse(progress_serializer.data, safe=False, status=status.HTTP_200_OK)
 
-        except Progress.DoesNotExist:
-            return JsonResponse({"error": "Progress record not found."}, status=404)
+        #except Progress.DoesNotExist:
+            #return JsonResponse({"error": "Progress record not found."}, status=404)
+    
+    elif request.method == '/progress/':
+        print("error1")
+        return JsonResponse({"error": "Method not allowed2."}, status=407)
 
     else:
-        return JsonResponse({"error": "Method not allowed."}, status=405)
-
+        print("error2")
+        return JsonResponse({"error": "Method not allowed."}, status=406)
 
 
 # Get all users

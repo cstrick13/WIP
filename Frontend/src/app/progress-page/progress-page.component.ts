@@ -69,7 +69,8 @@ export class ProgressPageComponent implements OnInit {
       (data) => {
         this.progressRecords = data.map((record: any) => ({
           ...record,
-          newProgress: record.currentProgress  
+          newProgress: record.currentProgress,
+          userid: record.userid
         }));
       },
       (error) => {
@@ -105,6 +106,7 @@ export class ProgressPageComponent implements OnInit {
     this.sharedService.createProgress(payload).subscribe(
       response => {
         console.log('User post sent to Django successfully:', response);
+        this.getProgressRecords();  // Fetch updated progress records
       },
       error => {
         console.error('Error sending post to Django:', error);
@@ -112,20 +114,50 @@ export class ProgressPageComponent implements OnInit {
     );
   }
 
-  updateProgress(workoutType: string, newProgress: number): void {
-    this.isUpdating = true;
+  async updateProgress(newProgress: number) {
+    if (!this.userId) {
+      console.error('User ID is not available');
+      return;
+    }
+  
+    const updateData = {
+      currentProgress: newProgress,
+      userid: this.userId,
+    };
 
-    this.sharedService.updateProgress(workoutType, newProgress).subscribe({
-      next: (response) => {
-        console.log('Progress updated:', response);
-        this.getProgressRecords();
+  
+    console.log('Sending updated progress data:', updateData); // Log the data being sent
+
+    this.sharedService.updateProgress(this.newProgress, 1).subscribe(
+      response => {
+        console.log('Progress updated successfully:', response);
       },
-      error: (error) => {
+      error => {
         console.error('Error updating progress:', error);
+      }
+    );
+  
+    await this.sendUpdateToDjango(updateData);
+  }
+  
+  sendUpdateToDjango(updateData: any) {
+    const payload = { ...updateData };
+    console.log(payload);
+    this.sharedService.updateProgress(payload, 1).subscribe(
+      response => {
+        console.log('Progress updated successfully:', response);
+        this.getProgressRecords();  // Refresh records after updating progress
       },
-      complete: () => {
+      error => {
+        console.error('Error updating progress in Django:', error);
+        if (error.status === 404) {
+          alert('Progress record not found or you are not authorized to update it.');
+        }
+      },
+      () => {
         this.isUpdating = false;
       }
-    });
+    );
   }
+  
 }

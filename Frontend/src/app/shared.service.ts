@@ -28,11 +28,10 @@ export class SharedService {
     return this.http.get<any[]>(`${this.APIUrl}/progress/`);
   }
 
-  updateProgress(workoutType: string, currentProgress: number): Observable<any> {
-    const payload = { workout_type: workoutType, current_progress: currentProgress };
-    return this.http.put<any>(`${this.APIUrl}/progress/`, payload);
+  updateProgress(updateData: any, id: number): Observable<any> {
+    return this.http.put<any>(`${this.APIUrl}/progress/${id}/`, updateData);
   }
-
+  
   createProgress(progressData: any): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/progress/`, progressData);
   }

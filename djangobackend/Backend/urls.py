@@ -18,4 +18,5 @@ urlpatterns = [
    path('get-posts/', views.getPosts),
    path('get-for-you-feed/', views.getRelaventFeed),
    path('get-following-feed/', views.getFollowingFeed),
+   path('progress/<int:id>/', views.getProgress)
 ]

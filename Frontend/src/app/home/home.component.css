@@ -7,98 +7,10 @@
     flex: 1;
     height: 100vh;*/
 }
-
-/* For the "For you" Navbar */
-.tabs {
-    border-bottom: 1px solid var(--bs-tertiary-bg);
-    margin-bottom: 15px;
-}
-
-/* For each individual links in "For You" Navbar*/
-.tab-link {
-    /* Changes the text color */
-    color: var(--bs-body-color);
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.post-box {
-    /* Changes the background color */
-    background-color: var(--pirmary-bg);
-    /* Border Radius */
-    border-radius: 10px;
-    /* Adds in box shadow */
-    box-shadow: 4px 4px 8px 0px var(--bs-tertiary-bg);
-    margin-top: 20px;
-    border-bottom: 1px solid var(--bs-tertiary-bg);
-}
-
-.d-flex {
-    display: flex;
-    width: 100%;
-}
-
-.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%; /* Make the image circular */
-    margin-left: 10px; /* Add space between the image and the left side */
-    margin-right: 10px; /* Add space between the image and the right side */
-}
-
-.post-form {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-
-.preview-container {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.preview-image {
-  width: 100%; /* Make the preview image responsive */
-  height: 100%; /* Prevent the preview from taking up too much space */
-  border-radius: 8px;
-  object-fit: cover;
-}
 .post-container{
   max-height: 700px; /* Set maximum height for the scrollable area */
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 0 15px;
-}
-
-
-
-
-
-.custom-file-input {
-  position: relative;
-  display: inline-block;
-}
-
-.file-input {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0; /* Hide the default input */
-  cursor: pointer;
-}
-
-.file-icon {
-  font-size: 24px;
-  color: #007bff;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.file-icon:hover {
-  color: #0056b3;
 }
 .post-card {
   margin-top: 40px;
@@ -288,8 +200,19 @@
   color: #333;
 }
 
-
-
+  .post-box {
+    background-color: var(--pirmary-bg);
+    border-radius: 10px;
+    /*padding: 20px;*/
+    margin-top: 20px;
+    border-bottom: 1px solid var(--bs-tertiary-bg);
+  }
+  .profile-image {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 10px; /* Add space between the image and the text */
+}
 .form-control {
     border: 1px solid transparent;
     outline: none;
@@ -298,7 +221,15 @@
     width: 100%;
     resize: none;
 }
-
+  .tabs {
+    border-bottom: 1px solid #333;
+    margin-bottom: 15px;
+  }
+  .tab-link {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+  }
   .tab-link.active {
     border-bottom: 2px solid #1d9bf0;
   }
@@ -329,18 +260,16 @@
     background-color: #1b95e9;
     color: white;
     border: none;
+    /*width: 90%;*/
     padding: 10px 20px;
+    margin: 10px 0;
     border-radius: 30px;
     cursor: pointer;
+    text-align: center;
     font-size: 16px;
-    align-self: flex-end; /* Move button to the right */
     transition: background-color 200ms;
-  }
-  
-  .post-button:hover {
+}
+
+.post-button:hover {
     background-color: #1a85d6;
-  }
-
-
-
-
+}

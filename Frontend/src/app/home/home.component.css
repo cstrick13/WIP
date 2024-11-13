@@ -7,10 +7,76 @@
     flex: 1;
     height: 100vh;*/
 }
+/* Container for the reply section */
+.reply {
+  color: #000000; /* White text */
+}
+
+/* Hover effect to make it interactive */
+.reply:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Optional: Add a separator between replies */
+.reply + .reply {
+  border-top: 1px solid #444; /* Darker separator for contrast */
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+}
+
+.preview-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 100%; /* Make the preview image responsive */
+  height: 100%; /* Prevent the preview from taking up too much space */
+  border-radius: 8px;
+  object-fit: cover;
+}
 .post-container{
   max-height: 700px; /* Set maximum height for the scrollable area */
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 0 15px;
+}
+.post-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.d-flex {
+  display: flex;
+  width: 100%;
+}
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Hide the default input */
+  cursor: pointer;
+}
+
+.file-icon {
+  font-size: 24px;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.file-icon:hover {
+  color: #0056b3;
 }
 .post-card {
   margin-top: 40px;
@@ -260,16 +326,14 @@
     background-color: #1b95e9;
     color: white;
     border: none;
-    /*width: 90%;*/
     padding: 10px 20px;
-    margin: 10px 0;
     border-radius: 30px;
     cursor: pointer;
-    text-align: center;
     font-size: 16px;
+    align-self: flex-end; /* Move button to the right */
     transition: background-color 200ms;
-}
-
-.post-button:hover {
+  }
+  
+  .post-button:hover {
     background-color: #1a85d6;
-}
+  }

@@ -184,6 +184,44 @@ def searchPosts(request):
     else:
         return JsonResponse("Failed to Get. Not GET.",safe=False)
 
+@api_view(['POST'])
+def create_replies(request):
+    if request.method == 'POST':
+        print("Request: ",request)
+        data = JSONParser().parse(request)
+        post_id = data.get('post_id')
+        user_id = data.get('userid')
+        content = data.get('content')
+        
+        print("Post ID: ",post_id)
+        print("User ID: ",user_id)
+        print("Content: ",content)
+        reply = ReplySerializer(data={'post': post_id, 'userid': user_id, 'content': content})
+        
+        if reply.is_valid():
+            reply.save()
+            return JsonResponse({"success": True, "message": "Reply added successfully"}, status=200)
+        else:
+            return JsonResponse({"success": False, "message": "Failed to add reply", "errors": reply.errors}, status=400)
+    else:
+        return JsonResponse({"success": False, "message": "Failed to add reply. Not a POST request"}, status=405)
+            
+@api_view(['GET'])
+def get_replies_from_post(request):
+    if request.method == 'GET':
+        post_id = JSONParser().parse(request)['post_id']
+        print("Post ID: ",post_id)
+        try:
+            
+            replies = Reply.objects.filter(post=post_id)
+            return JsonResponse(ReplySerializer(replies, many=True).data, safe=False)
+        
+        except Post.DoesNotExist:
+            return JsonResponse({'error': 'Post not found'}, status=404)
+    else:
+        return JsonResponse("Failed to Get. Not GET.", safe=False)
+    
+    
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

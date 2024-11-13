@@ -1,14 +1,21 @@
 <div class="container">
-  <div class="tabs d-flex">
+
+  <!-- The "For You" Navbar -->
+  <div id="for-you-navbar" class="tabs d-flex">
     <div class="tab-link active">For you</div>
-    <div class="tab-link">Following</div>
   </div>
 
   <!-- Post Box -->
   <div class="post-box">
     <div class="d-flex">
+
+      <!-- Profile Image -->
       <img class="profile-image" [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="Profile image">
+
+      <!-- Post Form -->
       <form (ngSubmit)="createPost()" class="post-form">
+
+        <!-- Post Content -->
         <textarea class="form-control" rows="1" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
   
         <!-- Custom Icon for File Upload -->
@@ -44,9 +51,11 @@
             <div class="action like-action" (click)="likePost(post.id)">
               <i class="fas fa-heart"></i>
             </div>
-            <div class="action comment-action">
-              <i class="fas fa-comment"></i>
-            </div>
+            <a [routerLink]="['/post-page', post.id]">
+              <div class="action comment-action">
+                <i class="fas fa-comment"></i>
+              </div>
+            </a>
           </div>
           <div class="like-count">
             <span>{{ post.likes ?? 0 }} Likes</span>

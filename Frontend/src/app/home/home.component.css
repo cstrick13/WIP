@@ -7,6 +7,52 @@
     flex: 1;
     height: 100vh;*/
 }
+
+/* For the "For you" Navbar */
+.tabs {
+    border-bottom: 1px solid var(--bs-tertiary-bg);
+    margin-bottom: 15px;
+}
+
+/* For each individual links in "For You" Navbar*/
+.tab-link {
+    /* Changes the text color */
+    color: var(--bs-body-color);
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.post-box {
+    /* Changes the background color */
+    background-color: var(--pirmary-bg);
+    /* Border Radius */
+    border-radius: 10px;
+    /* Adds in box shadow */
+    box-shadow: 4px 4px 8px 0px var(--bs-tertiary-bg);
+    margin-top: 20px;
+    border-bottom: 1px solid var(--bs-tertiary-bg);
+}
+
+.d-flex {
+    display: flex;
+    width: 100%;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Make the image circular */
+    margin-left: 10px; /* Add space between the image and the left side */
+    margin-right: 10px; /* Add space between the image and the right side */
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
 .preview-container {
   margin-top: 10px;
   display: flex;
@@ -24,16 +70,11 @@
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 0 15px;
 }
-.post-form {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
 
-.d-flex {
-  display: flex;
-  width: 100%;
-}
+
+
+
+
 .custom-file-input {
   position: relative;
   display: inline-block;
@@ -247,19 +288,8 @@
   color: #333;
 }
 
-  .post-box {
-    background-color: var(--pirmary-bg);
-    border-radius: 10px;
-    /*padding: 20px;*/
-    margin-top: 20px;
-    border-bottom: 1px solid var(--bs-tertiary-bg);
-  }
-  .profile-image {
-    width: 40px; /* Adjust the size as needed */
-    height: 40px; /* Adjust the size as needed */
-    border-radius: 50%; /* Make the image circular */
-    margin-right: 10px; /* Add space between the image and the text */
-}
+
+
 .form-control {
     border: 1px solid transparent;
     outline: none;
@@ -268,15 +298,7 @@
     width: 100%;
     resize: none;
 }
-  .tabs {
-    border-bottom: 1px solid #333;
-    margin-bottom: 15px;
-  }
-  .tab-link {
-    padding: 10px 15px;
-    cursor: pointer;
-    color: white;
-  }
+
   .tab-link.active {
     border-bottom: 2px solid #1d9bf0;
   }
@@ -318,3 +340,7 @@
   .post-button:hover {
     background-color: #1a85d6;
   }
+
+
+
+

@@ -1,0 +1,112 @@
+<div class="progress-page">
+    <h1>View Work in Progress</h1>
+  
+    <!-- Button to trigger modal -->
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProgressModal">
+      Add New Progress
+    </button>
+  
+    <!-- Modal for adding new progress -->
+    <div class="modal fade" id="addProgressModal" tabindex="-1" aria-labelledby="addProgressModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal content here -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="addProgressModalLabel">Add New Progress</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="createProgress()">
+              <div class="mb-3">
+                <label for="workoutType" class="form-label">Workout Type:</label>
+                <input
+                  type="text"
+                  [(ngModel)]="newProgress.workoutType"
+                  name="workoutType"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="progressGoal" class="form-label">Goal:</label>
+                <input
+                  type="number"
+                  [(ngModel)]="newProgress.progressGoal"
+                  name="progressGoal"
+                  class="form-control"
+                  required
+                  min="1"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="currentProgress" class="form-label">Current Progress:</label>
+                <input
+                  type="number"
+                  [(ngModel)]="newProgress.currentProgress"
+                  name="currentProgress"
+                  class="form-control"
+                  required
+                  min="0"
+                />
+              </div>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create Progress</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- List of existing progress bars -->
+    <div class="content" *ngFor="let progress of progressRecords">
+      <mat-card class="post-card">
+        <mat-card-header>
+          <mat-card-title class="title">
+            <strong>{{ progress.username }}</strong> is working on {{ progress.workoutType }}
+          </mat-card-title>
+          <mat-card-subtitle class="subtitle">{{ progress.startDate | date: 'short' }}</mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <!-- Progress bar based on current progress -->
+          <div class="progress">
+            <div
+              class="progress-bar"
+              [style.width]="getProgressPercentage(progress.currentProgress, progress.progressGoal) + '%'"
+              role="progressbar"
+              [attr.aria-valuenow]="progress.currentProgress"
+              [attr.aria-valuemin]="0"
+              [attr.aria-valuemax]="progress.progressGoal"
+            >
+              {{ progress.currentProgress }} / {{ progress.progressGoal }}
+            </div>
+          </div>
+  
+          <!-- Update form, only visible to the owner -->
+          <div *ngIf="progress.userid === userId">
+            <form (ngSubmit)="updateProgress(progress.newProgress, progress.id)">
+              <label for="newProgress">Update Progress:</label>
+              <input
+                type="number"
+                [(ngModel)]="progress.newProgress"
+                name="newProgress{{ progress.id }}"
+                required
+                min="0"
+                [max]="progress.progressGoal"
+                style="font-size: 12px; padding: 2px 4px;"
+              />
+              <button type="submit" class="btn btn-primary" style="font-size: 12px; padding: 2px 4px;">
+                Update Progress
+              </button>
+            </form>
+  
+            <!-- Loading indicator -->
+            <div *ngIf="isUpdating" class="loading">
+              Updating progress...
+            </div>
+          </div>
+          <!-- End of owner-only section -->
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

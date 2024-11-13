@@ -45,3 +45,13 @@ class Connection(models.Model):
 
     def __str__(self):
         return f"{self.follower} follows {self.followed}"
+
+class Progress(models.Model):
+    userid = models.ForeignKey(User, on_delete=models.CASCADE)
+    workoutType = models.CharField(max_length=100)
+    currentProgress = models.CharField(max_length=10)
+    progressGoal = models.CharField(max_length=10)
+    startDate = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.workout_type}: {self.current_progress}/{self.progress_goal} ({self.startDate})"

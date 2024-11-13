@@ -12,12 +12,11 @@ from django.core.exceptions import ValidationError
 
 from Backend.serializers import (TestSerializer)
 from Backend.models import (Test)
-from .models import User, Connection, Post, Reply
+from .models import User, Connection, Post, Reply, Progress
 
-from .serializers import UserSerializer, ConnectionSerializer, PostSerializer, ReplySerializer
+from .serializers import UserSerializer, ConnectionSerializer, PostSerializer, ReplySerializer, ProgressSerializer
 
 #Create your views here.
-
 @csrf_exempt
 def testApi(request,id=0):
     tests = Test.objects.all()
@@ -184,6 +183,32 @@ def searchPosts(request):
     else:
         return JsonResponse("Failed to Get. Not GET.",safe=False)
 
+@api_view(['POST'])
+def create_progress(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ProgressSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Progress created', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Failed to create. Not a POST request.", status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['PUT'])
+def update_progress(request):
+    if request.method == 'PUT':
+        data = JSONParser().parse(request)
+        progress_id = data.get('id')
+        progress = get_object_or_404(Progress, id=progress_id)
+        serializer = ProgressSerializer(progress, data=data, partial=True)  # partial=True allows partial updates
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Progress updated', 'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Failed to update. Not a PUT request.", status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -201,3 +226,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class ReplyViewSet(viewsets.ModelViewSet):
     queryset = Reply.objects.all()
     serializer_class = ReplySerializer
+
+class ProgressViewSet(viewsets.ModelViewSet):
+    queryset = Progress.objects.all()
+    serializer_class = ProgressSerializer

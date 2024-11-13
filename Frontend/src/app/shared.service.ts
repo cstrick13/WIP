@@ -16,6 +16,11 @@ export class SharedService {
   getAllPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.APIUrl}/posts/`);
   }
+
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/users/`);
+  }
+  
   createUser(userData: any): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/create-user/`, userData);  // Change the URL to your actual endpoint
   }
@@ -27,7 +32,14 @@ export class SharedService {
   getProgress(): Observable<any[]> {
     return this.http.get<any[]>(`${this.APIUrl}/progress/`);
   }
-
+  addReply(replyData: any): Observable<any> {
+    return this.http.post<any>(`${this.APIUrl}/add-reply/`, replyData);
+  }
+  
+  getReplies(postId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/get-replies/?post_id=${postId}`);
+  }
+  
   updateProgress(updateData: any, id: number): Observable<any> {
     return this.http.put<any>(`${this.APIUrl}/progress/${id}/`, updateData);
   }
@@ -35,5 +47,5 @@ export class SharedService {
   createProgress(progressData: any): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/progress/`, progressData);
   }
-  
+
 }

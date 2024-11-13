@@ -16,6 +16,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ProgressPageComponent } from './progress-page/progress-page.component';
+import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
+import { PostPageComponent } from './pages/post-page/post-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ProgressPageComponent } from './progress-page/progress-page.component';
     SidebarComponent,
     RightSidebarComponent,
     ProfilePageComponent,
+    UserProfilePageComponent,
+    PostPageComponent,
     ProgressPageComponent
   ],
   imports: [

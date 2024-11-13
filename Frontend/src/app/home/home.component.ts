@@ -15,7 +15,10 @@ export class HomeComponent implements OnInit {
   userProfile: any;
   content: string = '';
   posts: any[] = [];
-  selectedFile: string | null = null; // Holds base64-encoded file data
+  selectedFile: string | null = null;
+  selectedPostId: number | null = null;
+  replyContent: string = '';
+  replies: any[] = [];
 
   constructor(private router: Router, private sharedService: SharedService) {}
 
@@ -101,7 +104,37 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
+  openReplyModal(postId: number) {
+    this.selectedPostId = postId;
+    this.fetchReplies(postId);
+  }
+  
+  // Fetch replies for a post
+  fetchReplies(postId: number) {
+    this.sharedService.getReplies(postId).subscribe(
+      (response) => this.replies = response,
+      (error) => console.error('Error fetching replies:', error)
+    );
+  }
+  
+  // Add reply to a post
+  addReply() {
+    if (!this.replyContent.trim()) return; // Ensure content is not empty
+  
+    const replyData = {
+      content: this.replyContent,
+      post: this.selectedPostId,
+      user: this.userId // Pass the user ID
+    };
+  
+    this.sharedService.addReply(replyData).subscribe(
+      (response) => {
+        this.replies.push(response); // Add reply to replies array
+        this.replyContent = '';      // Clear reply input
+      },
+      (error) => console.error('Error adding reply:', error)
+    );
+  }
   fetchPosts() {
     this.sharedService.getAllPosts().subscribe(
       (response) => {

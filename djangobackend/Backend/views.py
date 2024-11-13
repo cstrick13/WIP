@@ -184,6 +184,79 @@ def searchPosts(request):
     else:
         return JsonResponse("Failed to Get. Not GET.",safe=False)
 
+@api_view(['POST'])
+def create_replies(request):
+    if request.method == 'POST':
+        content = request.data.get("content")
+        post_id = request.data.get("post")
+        user_id = request.data.get("user")
+
+        # Ensure all required data is provided
+        if not content or not post_id or not user_id:
+            return JsonResponse({"success": False, "message": "Missing required fields (content, post, or user)"}, status=400)
+
+        try:
+            # Correctly reference the post and user objects
+            post = Post.objects.get(id=post_id)  # Use 'id' to get the Post by its primary key
+            user = User.objects.get(userid=user_id)  # Use 'userid' to get the User by its primary key
+        except Post.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Post not found"}, status=404)
+        except User.DoesNotExist:
+            return JsonResponse({"success": False, "message": "User not found"}, status=404)
+
+        # Create and save the reply
+        try:
+            reply = Reply.objects.create(content=content, post=post, userid=user)  # Use 'userid' to assign the User
+            reply.save()
+
+            return JsonResponse({
+                "success": True,
+                "id": reply.id,
+                "content": reply.content,
+                "user": reply.userid.username,  # Access the username through the 'userid' field
+                "timestamp": reply.timestamp
+            }, status=200)
+        except Exception as e:
+            return JsonResponse({"success": False, "message": f"Error saving reply: {str(e)}"}, status=500)
+    else:
+        return JsonResponse({"success": False, "message": "Failed to add reply. Not a POST request"}, status=405)
+
+
+@api_view(['GET'])
+def get_replies_from_post(request):
+    if request.method == 'GET':
+        # Extract 'post_id' from the query parameters
+        post_id = request.GET.get('post_id')
+
+        if post_id is None:
+            return JsonResponse({'error': 'post_id is required'}, status=400)
+
+        try:
+            # Ensure the post ID is an integer
+            post_id = int(post_id)
+            replies = Reply.objects.filter(post=post_id)
+
+            # Prepare the replies data, including the username
+            replies_data = []
+            for reply in replies:
+                # Assuming the Reply model has a foreign key to User and User has a 'username' field
+                reply_data = ReplySerializer(reply).data
+                reply_data['username'] = reply.userid.username  # Get the username from the related user
+                replies_data.append(reply_data)
+
+            return JsonResponse(replies_data, safe=False)
+
+        except ValueError:
+            return JsonResponse({'error': 'Invalid post_id format. Must be an integer.'}, status=400)
+
+        except Reply.DoesNotExist:
+            return JsonResponse({'error': 'Replies not found for the specified post'}, status=404)
+
+    return JsonResponse({"error": "Method Not Allowed"}, status=405)
+
+
+    
+    
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

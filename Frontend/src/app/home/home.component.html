@@ -44,7 +44,7 @@
             <div class="action like-action" (click)="likePost(post.id)">
               <i class="fas fa-heart"></i>
             </div>
-            <div class="action comment-action">
+            <div class="action comment-action" (click)="openReplyModal(post.id)" data-bs-toggle="modal" data-bs-target="#replyModal">
               <i class="fas fa-comment"></i>
             </div>
           </div>
@@ -53,6 +53,30 @@
           </div>
         </mat-card-content>
       </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="replyModalLabel">Replies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Reply Input -->
+        <form (ngSubmit)="addReply()">
+          <textarea class="form-control" [(ngModel)]="replyContent" name="replyContent" rows="2" placeholder="Write a reply..."></textarea>
+          <button type="submit" class="btn btn-primary mt-2">Reply</button>
+        </form>
+
+        <!-- Replies List -->
+        <div *ngFor="let reply of replies" class="reply">
+          <strong>{{ reply.username }}</strong>: {{ reply.content }}
+          <small>{{ reply.timestamp | date: 'short' }}</small>
+        </div>
+      </div>
     </div>
   </div>
 </div>

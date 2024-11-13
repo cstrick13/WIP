@@ -2,44 +2,18 @@
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" (keydown)="onKeydown($event)" (focus)="showDropdown()" (blur)="hideDropdown()">
     <div class="dropdown-menu" [class.show]="dropdownVisible">
-      <div *ngIf="usersSearch.length > 0">
-        <h6 class="dropdown-header">Users</h6>
-        <a *ngFor="let user of usersSearch | slice:0:5" class="dropdown-item text-truncate" [routerLink]="['/user-profile-page', user.userid]">{{ user.username }}</a>
-      </div>
-      <!-- Divider -->
-      <div *ngIf="usersSearch.length > 0 && postsSearch.length > 0" class="dropdown-divider"></div>
-      <!-- Posts Section -->
-      <div *ngIf="postsSearch.length > 0">
-        <h6 class="dropdown-header">Posts</h6>
-        <a *ngFor="let post of postsSearch | slice:0:5" class="dropdown-item text-truncate" [routerLink]="['/post-page', post.id]">{{ post.content }}</a>
-      </div>
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
     </div>
   </div>
   <!-- Sidebar content here -->
-  <div class="container">
-    <div class="affirmation-widget">
-      <div class="card" style="background-image: url('./assets/affirmation1.jpg');">
-      </div>
-    </div>
-  
-    <div class="affirmation-widget">
-      <div class="card" style="background-image: url('./assets/affirmation2.jpg');">
-      </div>
-    </div>
-  
-    <div class="affirmation-widget">
-      <div class="card" style="background-image: url('./assets/affirmation3.jpg');">
-      </div>
-    </div>
-  
-    <div class="affirmation-widget">
-      <div class="card" style="background-image: url('./assets/affirmation4.gif');">
-
-      </div>
+  <div class="card" style="width: 18rem;">
+    <img src="./assets/logo.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Subscribe to Premium</h5>
+      <p class="card-text">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
-  
-  
-  
-  
 </div>

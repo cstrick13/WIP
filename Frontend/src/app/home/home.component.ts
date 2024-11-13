@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   content: string = '';
   posts: any[] = [];
   selectedFile: string | null = null; // Holds base64-encoded file data
+  replyContent: string = ''; // Holds the reply text
+  replyPostId: number | null = null;
 
   constructor(private router: Router, private sharedService: SharedService) {}
 
@@ -111,5 +113,28 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching posts:', error);
       }
     );
+  }
+  setReplyPostId(postId: number): void {
+    this.replyPostId = postId;
+  }
+  addReply(): void {
+    if (this.replyContent.trim() && this.replyPostId && this.userId) {
+      const replyData = {
+        post_id: this.replyPostId,
+        user_id: this.userId,
+        content: this.replyContent.trim()
+      };
+
+      this.sharedService.createReply(replyData).subscribe(
+        response => {
+          console.log('Reply added successfully:', response);
+          this.replyContent = ''; // Clear reply content after submission
+          this.replyPostId = null; // Clear post ID
+        },
+        error => {
+          console.error('Error adding reply:', error);
+        }
+      );
+    }
   }
 }

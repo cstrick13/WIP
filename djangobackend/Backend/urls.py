@@ -21,4 +21,5 @@ urlpatterns = [
    path('get-similar-users/', views.getSimilarUsers),
    path('search-users/', views.searchUsers),
    path('search-posts/', views.searchPosts),
+   path('create-reply/', views.createReply, name='create-reply'),
 ]

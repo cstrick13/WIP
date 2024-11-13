@@ -16,6 +16,11 @@ export class SharedService {
   getAllPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.APIUrl}/posts/`);
   }
+
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/users/`);
+  }
+  
   createUser(userData: any): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/create-user/`, userData);  // Change the URL to your actual endpoint
   }

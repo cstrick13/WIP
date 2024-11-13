@@ -1,0 +1,320 @@
+
+:host {
+    border-left: 1px solid var(--bs-tertiary-bg);
+    border-right: 1px solid var(--bs-tertiary-bg);
+    height: 100%;
+    /*display: flex;
+    flex: 1;
+    height: 100vh;*/
+}
+.preview-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 100%; /* Make the preview image responsive */
+  height: 100%; /* Prevent the preview from taking up too much space */
+  border-radius: 8px;
+  object-fit: cover;
+}
+.post-container{
+  max-height: 700px; /* Set maximum height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 0 15px;
+}
+.post-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.d-flex {
+  display: flex;
+  width: 100%;
+}
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Hide the default input */
+  cursor: pointer;
+}
+
+.file-icon {
+  font-size: 24px;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.file-icon:hover {
+  color: #0056b3;
+}
+.post-card {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: aliceblue;
+}
+
+.mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.title {
+  color: #000;
+  font-size: 18px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #757575;
+}
+
+.post-image-container {
+  margin-top: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically if needed */
+}
+
+.post-image {
+  width: 80%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.post-comment {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Styling for the actions */
+.post-actions {
+  display: flex;
+  align-items: center; /* Align icons vertically */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+}
+
+/* Each action */
+.action {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #757575;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-right: 5px; /* Reduces the space between icons */
+}
+
+.action i {
+  margin-right: 6px; /* Slightly closer icon and text */
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for the like button */
+.like-action:hover {
+  color: red;
+}
+
+.like-action:hover i {
+  color: red;
+}
+
+/* Comment icon shouldn't change color */
+.comment-action:hover {
+  color: #757575; /* Ensures the comment text doesn't change color */
+}
+
+.comment-action i {
+  color: #757575; /* Ensures the comment icon doesn't change color */
+}
+
+/* Additional padding for text below the post */
+.post-comment {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.like-count {
+  font-size: 14px;
+  color: #757575;
+ 
+  margin-top: 5px; /* Adds a small gap between the actions and the like count */
+}
+.hidden {
+  display: none;
+}
+
+.comments-section {
+  margin-top: 10px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
+
+.view-comments-text {
+  cursor: pointer;
+  color: #8e8e8e;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.view-comments-text:hover {
+  color: #000;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.comment-content {
+  background-color: #f9f9f9;
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 85%;
+}
+
+.comment-text {
+  font-size: 14px;
+  margin: 0;
+  color: #262626;
+}
+
+.comment-text strong {
+  font-weight: 600;
+  color: #262626;
+}
+/* General styles for replies section */
+.replies-section {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* Styling for each reply */
+.reply {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for replies */
+.reply:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styling */
+.reply-header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Text styling */
+.reply-text {
+  margin: 0;
+  color: #333;
+}
+
+  .post-box {
+    background-color: var(--pirmary-bg);
+    border-radius: 10px;
+    /*padding: 20px;*/
+    margin-top: 20px;
+    border-bottom: 1px solid var(--bs-tertiary-bg);
+  }
+  .profile-image {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 10px; /* Add space between the image and the text */
+}
+.form-control {
+    border: 1px solid transparent;
+    outline: none;
+    box-shadow: none;
+    font-size: 20px;
+    width: 100%;
+    resize: none;
+}
+  .tabs {
+    border-bottom: 1px solid #333;
+    margin-bottom: 15px;
+  }
+  .tab-link {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+  }
+  .tab-link.active {
+    border-bottom: 2px solid #1d9bf0;
+  }
+  .input-group textarea {
+    background-color: var(--bs-body-color);
+    color: white;
+    border: none;
+    resize: none;
+  }
+  .icon-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .icon-group i {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .show-posts {
+    color: #1d9bf0;
+    text-align: center;
+    cursor: pointer;
+  }
+
+
+  .post-button {
+    background-color: #1b95e9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: flex-end; /* Move button to the right */
+    transition: background-color 200ms;
+  }
+  
+  .post-button:hover {
+    background-color: #1a85d6;
+  }

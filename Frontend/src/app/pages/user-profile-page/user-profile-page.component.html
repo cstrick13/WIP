@@ -1,0 +1,103 @@
+<div class="profile-container">
+    <div class="profile-header">
+        <!-- Banner Image -->
+        <div class="profile-banner" 
+             [ngStyle]="{'background-image': userProfile?.bannerImage ? 'url(data:image/jpeg;base64,' + userProfile.bannerImage + ')' : 'url(assets/placeholder-banner.jpg)'}">
+        </div>
+        <!-- Profile Picture -->
+        <div class="profile-picture">
+            <img [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="">
+        </div>
+        <div class="profile-info">
+            <h1>{{ userProfile?.username || 'Username Not Available' }}</h1>
+            <p class="email">{{ this.userEmail || 'Email Not Available' }}</p>
+            <p class="bio">{{ userProfile?.bio || 'No bio available' }}</p> <!-- Display bio or a placeholder -->
+        </div>
+    </div>
+    <div class="profile-stats">
+        <p><i class="fas fa-calendar-alt"></i> Joined November 2022</p>
+        <p><strong class="strong-white">0</strong> Followers <strong class="strong-white">1</strong> Following</p>
+    </div>
+
+    <nav class="profile-nav">
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Post</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Likes</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Media</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <!-- Dummy posts -->
+            <div class="post">
+                <p><strong>User1</strong>: Just finished a 5K run today! Feeling great! 🏃‍♂️ #fitness #healthyliving</p>
+                <small>2 hours ago</small>
+            </div>
+            <div class="post">
+                <p><strong>User2</strong>: Tried a new recipe for protein pancakes this morning. Delicious! 🥞 #gains</p>
+                <small>4 hours ago</small>
+            </div>
+            <div class="post">
+                <p><strong>User3</strong>: Had a killer leg day workout. Can barely walk now! 🦵 #gymgoals</p>
+                <small>Yesterday</small>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <!-- Dummy likes -->
+            <div class="like">
+                <p><strong>User4</strong> liked your post: "Completed my first marathon!"</p>
+                <small>5 hours ago</small>
+            </div>
+            <div class="like">
+                <p><strong>User5</strong> liked your post: "Healthy meal prep for the week done! 🥗🍲"</p>
+                <small>2 days ago</small>
+            </div>
+            <div class="like">
+                <p><strong>User6</strong> liked your post: "Crushed my back workout today!"</p>
+                <small>3 days ago</small>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">cory</div>
+    </div>
+    
+</div>
+<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Update Your Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio:</label>
+                        <textarea id="bio" class="form-control" [(ngModel)]="userBio" name="bio" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Choose Your Banner Image:</label>
+                        <div class="image-preview">
+                            <img *ngIf="selectedBannerImage" [src]="'data:image/png;base64,' + selectedBannerImage" alt="Selected Banner Image" class="img-fluid" />
+                            <img *ngIf="!selectedBannerImage && userProfile?.bannerImage" [src]="'data:image/png;base64,' + userProfile.bannerImage" alt="Current Banner Image" class="img-fluid" />
+                            <img *ngIf="!selectedBannerImage && !userProfile?.bannerImage" src="assets/default-banner.jpg" alt="Default Banner Image" class="img-fluid" />
+                        </div>
+                        <input type="file" id="bannerImage" (change)="onBannerImageSelected($event)" accept="image/*" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Choose Your Profile Picture:</label>
+                        <div class="image-preview">
+                            <img *ngIf="selectedImage" [src]="'data:image/png;base64,' + selectedImage" alt="Selected Profile Picture" class="img-fluid" />
+                            <img *ngIf="!selectedImage && userProfile?.profilePicture" [src]="'data:image/png;base64,' + userProfile.profilePicture" alt="Current Profile Picture" class="img-fluid" />
+                            <img *ngIf="!selectedImage && !userProfile?.profilePicture" src="assets/default-profile.jpg" alt="Default Profile Image" class="img-fluid" />
+                        </div>
+                        <input type="file" id="profilePicture" (change)="onImageSelected($event)" accept="image/*" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">Update Profile</button>
+            </div>
+        </div>
+    </div>
+</div>

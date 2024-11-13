@@ -34,7 +34,6 @@ export class SharedService {
   }
 
   createProgress(progressData: any): Observable<any> {
-    console.log('Progress data being sent:', progressData);  // Log data before sending
     return this.http.post<any>(`${this.APIUrl}/progress/`, progressData);
   }
   

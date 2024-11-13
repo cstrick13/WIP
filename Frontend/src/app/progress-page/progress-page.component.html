@@ -15,7 +15,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form (ngSubmit)="createNewProgress()">
+                    <form (ngSubmit)="createProgress()">
                         <div class="mb-3">
                             <label for="workoutType" class="form-label">Workout Type:</label>
                             <input type="text" [(ngModel)]="newProgress.workoutType" name="workoutType" class="form-control" required>

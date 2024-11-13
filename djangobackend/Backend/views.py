@@ -6,8 +6,6 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import viewsets
 from django.db.models import Q
-from rest_framework.exceptions import ValidationError
-from django.shortcuts import get_object_or_404
 
 from django.core.exceptions import ValidationError
 
@@ -160,70 +158,7 @@ def getProgress(request):
         print("error2")
         return JsonResponse({"error": "Method not allowed."}, status=406)
 
-        filtered_users = [
-            user for user in users 
-            if user.selectedInterests and any(preference in user.selectedInterests for preference in user_preferences)
-        ]
-        
-        # Pick 4 random users from the list to return
-        import random
-        random.shuffle(filtered_users)
-        filtered_users = filtered_users[:4]
-        
-        return JsonResponse(UserSerializer(filtered_users,many=True).data,safe=False)
-    else:
-        return JsonResponse("Failed to Get. Not POST.",safe=False)
-    
-@api_view(['GET'])
-def searchUsers(request):
-    if(request.method == 'GET'):
-        search_query = JSONParser().parse(request)['search_query']
-        print("Search Query: ",search_query)
-        
-        users = User.objects.filter(Q(username__icontains=search_query))
-        print("Users: ",users)
-        
-        return JsonResponse(UserSerializer(users,many=True).data,safe=False)
-    else:
-        return JsonResponse("Failed to Get. Not GET.",safe=False)
 
-@api_view(['GET'])
-def searchPosts(request):
-    if(request.method == 'GET'):
-        search_query = JSONParser().parse(request)['search_query']
-        print("Search Query: ",search_query)
-        
-        posts = Post.objects.filter(Q(content__icontains=search_query))
-        print("Posts: ",posts)
-        
-        return JsonResponse(PostSerializer(posts,many=True).data,safe=False)
-    else:
-        return JsonResponse("Failed to Get. Not GET.",safe=False)
-@api_view(['POST'])
-def createReply(request):
-    if request.method == 'POST':
-        reply_data = JSONParser().parse(request)
-
-        # Extract user_id and post_id from the data
-        user_id = reply_data.get('user_id')
-        post_id = reply_data.get('post_id')
-        content = reply_data.get('content')
-
-        # Ensure user_id, post_id, and content are provided
-        if not all([user_id, post_id, content]):
-            return JsonResponse("user_id, post_id, and content are required fields.", safe=False)
-
-        # Retrieve User and Post instances
-        user = get_object_or_404(User, userid=user_id)
-        post = get_object_or_404(Post, id=post_id)
-
-        # Create Reply instance with validated data
-        reply = Reply(post=post, userid=user, content=content)
-        reply.save()
-
-        return JsonResponse("Reply Added Successfully", safe=False)
-    else:
-        return JsonResponse("Failed to Add Reply. Not a POST request.", safe=False)
 # Get all users
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

@@ -1,63 +1,55 @@
 <div class="container">
-
-  <!-- The "For You" Navbar -->
-  <div id="for-you-navbar" class="tabs d-flex">
-    <div class="tab-link active">For you</div>
-  </div>
-
-  <!-- Post Box -->
-  <div class="post-box">
-    <div class="d-flex">
-
-      <!-- Profile Image -->
-      <img class="profile-image" [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="Profile image">
-
-      <!-- Post Form -->
-      <form (ngSubmit)="createPost()" class="post-form">
-
-        <!-- Post Content -->
-        <textarea class="form-control" rows="1" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
-  
-        <!-- Custom Icon for File Upload -->
-        <div class="custom-file-input mt-2">
-          <input type="file" (change)="onFileSelected($event)" accept="image/*" class="file-input">
-          <i class="fas fa-upload file-icon"></i>
-        </div>
-  
-        <!-- Preview Image -->
-        <div *ngIf="selectedFile" class="preview-container">
-          <img [src]="selectedFile" alt="Selected media preview" class="preview-image">
-        </div>
-  
-        <button class="post-button" type="submit">Post</button>
-      </form>
+    <div class="tabs d-flex">
+      <div class="tab-link active">For you</div>
+      <div class="tab-link">Following</div>
     </div>
-  </div>
 
-  <!-- Post Container -->
-  <div class="post-container">
+
+    <!-- Post Box -->
+    <div class="post-box">
+      <div class="d-flex">
+        <img class="profile-image" [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="">
+        <form (ngSubmit)="createPost()">
+              <textarea class="form-control" rows="1" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
+          <button class="post-button" type="submit">Post</button>
+      </form>
+      </div>
+
+
+      <!-- Icons and Post button -->
+      <div class="icon-group mt-2">
+        <div class="d-flex">
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+          <i class="fas fa-gem"></i>
+        </div>
+        <!--
+        <button type="subm" class="post-button"><span>Post</span></button>
+        -->
+        <!-- <button class="btn btn-primary">Post</button> -->
+      </div>
+    </div>
+    <div class="post-container">
     <div class="content" *ngFor="let post of posts">
       <mat-card class="post-card">
         <mat-card-header>
           <mat-card-title class="title"><strong>{{ post.username }}</strong> {{ post.content }}</mat-card-title>
           <mat-card-subtitle class="subtitle">{{ post.timestamp | date: 'short' }}</mat-card-subtitle>
         </mat-card-header>
-
+    
         <mat-card-content>
-          <div class="post-image-container" *ngIf="post.media">
-            <img [src]="post.media" alt="Post image" class="post-image">
+          <div class="post-image-container" *ngIf="post.imageUrl">
+            <img [src]="post.imageUrl" alt="Post image" class="post-image">
           </div>
           <div class="post-actions">
-            <div class="action like-action" (click)="likePost(post.id)">
+            <div class="action like-action">
               <i class="fas fa-heart"></i>
             </div>
-            <a [routerLink]="['/post-page', post.id]">
-              <div class="action comment-action">
-                <i class="fas fa-reply"></i>
-              </div>
-            </a>
-            <div class="action comment-action" data-bs-toggle="modal" data-bs-target="#commentModal" (click)="setReplyPostId(post.id)">
-              <i class="fas fa-comment"></i> 
+            <div class="action comment-action">
+              <i class="fas fa-comment"></i>
             </div>
           </div>
           <div class="like-count">
@@ -65,23 +57,6 @@
           </div>
         </mat-card-content>
       </mat-card>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="commentModalLabel">Add a Reply</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="addReply()">
-          <textarea class="form-control" [(ngModel)]="replyContent" name="replyContent" placeholder="Write your reply..." required></textarea>
-          <button type="submit" class="btn btn-primary mt-3">Post Reply</button>
-        </form>
-      </div>
     </div>
   </div>
 </div>

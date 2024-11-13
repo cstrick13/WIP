@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div class="post-container">
+    <div class="content" *ngIf="post">
+      <mat-card class="post-card">
+        <mat-card-header>
+          <mat-card-title class="title"><strong>{{ post.username }}</strong> {{ post.content }}</mat-card-title>
+          <mat-card-subtitle class="subtitle">{{ post.timestamp | date: 'short' }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="post-image-container" *ngIf="post.media">
+            <img [src]="post.media" alt="Post image" class="post-image">
+          </div>
+          <div class="post-actions">
+            <div class="action like-action">
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+          <div class="like-count">
+            <span>{{ post.likes ?? 0 }} Likes</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+<div class="post-container">
+  <div class="content" *ngFor="let reply of filteredReplies">
+    <mat-card class="post-card">
+      <mat-card-header>
+        <mat-card-title class="title"><strong>{{ reply.username }}</strong> {{ reply.content }}</mat-card-title>
+        <mat-card-subtitle class="subtitle">{{ reply.timestamp | date: 'short' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="post-actions">
+          <div class="action like-action">
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+</div>

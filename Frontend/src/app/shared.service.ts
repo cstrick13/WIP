@@ -39,4 +39,16 @@ export class SharedService {
     return this.http.post<any>(`${this.APIUrl}/create-reply/`, replyData);
   }
 
+  getProgress(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.APIUrl}/progress/`);
+  }
+
+  updateProgress(updateData: any, id: number): Observable<any> {
+    return this.http.put<any>(`${this.APIUrl}/progress/${id}/`, updateData);
+  }
+  
+  createProgress(progressData: any): Observable<any> {
+    return this.http.post<any>(`${this.APIUrl}/progress/`, progressData);
+  }
+
 }

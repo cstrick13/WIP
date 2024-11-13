@@ -6,11 +6,13 @@ import { authGuard } from './guards/auth.guard';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
+import { ProgressPageComponent } from './progress-page/progress-page.component';
 
 const routes: Routes = [  
   { path: 'splash', component: SplashscreenComponent, canActivate: [authGuard]},
   { path: 'home', component: HomeComponent},
   { path: 'profile-page', component: ProfilePageComponent},
+  { path: 'progress-page', component: ProgressPageComponent},
   { path: 'user-profile-page/:id', component: UserProfilePageComponent},
   { path: 'post-page/:id', component: PostPageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to 'home' if no path is provided

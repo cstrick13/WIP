@@ -53,15 +53,35 @@
             </div>
             <a [routerLink]="['/post-page', post.id]">
               <div class="action comment-action">
-                <i class="fas fa-comment"></i>
+                <i class="fas fa-reply"></i>
               </div>
             </a>
+            <div class="action comment-action" data-bs-toggle="modal" data-bs-target="#commentModal" (click)="setReplyPostId(post.id)">
+              <i class="fas fa-comment"></i> 
+            </div>
           </div>
           <div class="like-count">
             <span>{{ post.likes ?? 0 }} Likes</span>
           </div>
         </mat-card-content>
       </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="commentModalLabel">Add a Reply</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addReply()">
+          <textarea class="form-control" [(ngModel)]="replyContent" name="replyContent" placeholder="Write your reply..." required></textarea>
+          <button type="submit" class="btn btn-primary mt-3">Post Reply</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

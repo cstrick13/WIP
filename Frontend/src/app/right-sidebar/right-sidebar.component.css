@@ -69,3 +69,11 @@
 .dropdown-item:hover {
   background-color: #f8f9fa;
 }
+
+.text-truncate {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

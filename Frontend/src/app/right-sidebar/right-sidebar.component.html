@@ -2,9 +2,17 @@
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2" (keydown)="onKeydown($event)" (focus)="showDropdown()" (blur)="hideDropdown()">
     <div class="dropdown-menu" [class.show]="dropdownVisible">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
+      <div *ngIf="usersSearch.length > 0">
+        <h6 class="dropdown-header">Users</h6>
+        <a *ngFor="let user of usersSearch | slice:0:5" class="dropdown-item text-truncate" [routerLink]="['/user-profile-page', user.userid]">{{ user.username }}</a>
+      </div>
+      <!-- Divider -->
+      <div *ngIf="usersSearch.length > 0 && postsSearch.length > 0" class="dropdown-divider"></div>
+      <!-- Posts Section -->
+      <div *ngIf="postsSearch.length > 0">
+        <h6 class="dropdown-header">Posts</h6>
+        <a *ngFor="let post of postsSearch | slice:0:5" class="dropdown-item text-truncate" [routerLink]="['/post-page', post.id]">{{ post.content }}</a>
+      </div>
     </div>
   </div>
   <!-- Sidebar content here -->

@@ -16,7 +16,6 @@ export class SidebarComponent implements OnInit {
   userId: string | null = null; // User ID
   userProfile: any; // To store the user profile information
   content:any;
-  selectedFile: string | null = null; // Holds base64-encoded file data
 
   constructor(private router: Router, private sharedService:SharedService) {}
 
@@ -77,46 +76,34 @@ export class SidebarComponent implements OnInit {
     }
   }
   
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.selectedFile = reader.result as string; // Save base64 string
-        console.log('File selected and converted to base64:', this.selectedFile);
-      };
-      reader.readAsDataURL(file); // Convert to base64
-    } else {
-      this.selectedFile = null; // Clear if no file selected
-    }
-  }
-
   async createPost() {
     const content = this.content.trim();
-    
-    // Check for either content or selected file
-    if (!content && !this.selectedFile) {
-      alert('Please enter some content or select a file before posting.');
-      return;
+
+    if (!content) {
+        alert('Please enter some content before posting.');
+        return;
     }
 
     const postData = {
       content: content,
       userid: this.userId,
-      media: this.selectedFile, // Base64-encoded media if available
     };
 
-    console.log('Post data to be sent:', postData); // Log the post data before sending
     await this.sendPostToDjango(postData);
-    this.content = ''; // Reset content field
-    this.selectedFile = null; // Clear selected file
-  }
+
+    this.content = '';
+}
+
 
   sendPostToDjango(postData: any) {
-    this.sharedService.createPost(postData).subscribe(
+
+    const payload = {
+      ...postData
+    };
+    console.log(payload);
+    this.sharedService.createPost(payload).subscribe(
       response => {
-        console.log('Post sent to Django successfully:', response);
+        console.log('User post sent to Django successfully:', response);
       },
       error => {
         console.error('Error sending post to Django:', error);

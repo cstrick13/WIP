@@ -28,7 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'userid', 'username', 'content', 'media_type', 'timestamp', 'likes', 'tags']
         
 class ReplySerializer(serializers.ModelSerializer):
     class Meta:

@@ -90,26 +90,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="post-box">
-            <div class="d-flex">
-              <img class="profile-image" [src]="userProfile?.profilePicture ? 'data:image/jpeg;base64,' + userProfile.profilePicture : ''" alt="Profile image">
-              <form (ngSubmit)="createPost()" class="post-form">
-                <textarea class="form-control" rows="1" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required></textarea>
-          
-                <!-- Custom Icon for File Upload -->
-                <div class="mt-2">
-                  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        <div class="postbox">
+            <form id="postForm" (ngSubmit)="createPost()">
+                <div class="postbox_input">
+                    <textarea id="postTweet" [(ngModel)]="content" placeholder="What's on your mind?" name="postContent" required required style="width: 100%; height: 200px;" ></textarea>
                 </div>
-          
-                <!-- Preview Image -->
-                <div *ngIf="selectedFile" class="preview-container">
-                  <img [src]="selectedFile" alt="Selected media preview" class="preview-image">
-                </div>
-          
-                <button class="post-button" type="submit">Post</button>
-              </form>
-            </div>
-          </div>
+                <button class="post-button-modal" type="submit">Post</button>
+            </form>
+        </div>
     </div>
     </div>
   </div>

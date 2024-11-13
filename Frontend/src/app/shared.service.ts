@@ -23,6 +23,9 @@ export class SharedService {
   createPost(postData: any): Observable<any> {
     return this.http.post<any>(`${this.APIUrl}/create-post/`, postData);
   }
+  createReply(replyData: any): Observable<any> {
+    return this.http.post<any>(`${this.APIUrl}/create-reply/`, replyData);
+  }
 
   getProgress(): Observable<any[]> {
     return this.http.get<any[]>(`${this.APIUrl}/progress/`);
